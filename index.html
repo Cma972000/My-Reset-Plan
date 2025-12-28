@@ -3,316 +3,362 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Reset Plan | 60 Day Journey</title>
-    <!-- Importing a rounded, friendly font for reduced reading strain -->
+    <title>My Reset Plan | Honest Journey</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for visual icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            /* Calm, Neutral Palette - Soft on the eyes */
-            --bg-color: #FDFBF7; /* Warm off-white */
-            --card-bg: #FFFFFF;
-            --text-main: #475569; /* Slate gray, not harsh black */
+            --bg-color: #F8FAFC;
+            --text-main: #334155;
             --text-light: #94a3b8;
-            --accent-soft: #E2E8F0;
-            --highlight: #7dd3fc; /* Soft Blue */
-            --success: #86efac;   /* Soft Green */
-            --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-            --radius-lg: 24px;
-            --radius-md: 16px;
+            
+            /* Gradients for "Alive" feel */
+            --grad-morning: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 100%);
+            --grad-afternoon: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            --grad-evening: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            --grad-night: linear-gradient(135deg, #a6c0fe 0%, #f68084 100%);
+            
+            --success-glow: 0 0 15px rgba(134, 239, 172, 0.6);
+            --card-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            --radius: 20px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Nunito', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.5;
-            padding-bottom: 140px; /* Space for sticky footer on mobile */
+            margin: 0;
+            padding-bottom: 160px; /* Space for sticky footer */
+            overflow-x: hidden;
         }
 
-        /* --- Layout Container --- */
         .app-container {
-            max-width: 600px; /* Constrained width for focus */
+            max-width: 600px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
         }
 
-        /* --- Header --- */
+        /* --- 1. Header & Streak Badge --- */
         header {
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 30px;
-            padding-top: 20px;
-            animation: fadeIn 0.8s ease-out;
+            padding-top: 10px;
         }
 
-        h1 {
-            font-size: 2rem;
+        .header-text h1 {
+            font-size: 1.8rem;
             font-weight: 800;
-            color: #334155;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
+            margin: 0;
+            background: -webkit-linear-gradient(45deg, #334155, #64748b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .subtitle {
-            display: inline-block;
-            background: #f1f5f9;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #64748b;
+        .header-text .subtitle {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* --- Section Headers --- */
-        .time-block-header {
+        .streak-badge {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            box-shadow: var(--card-shadow);
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #f59e0b; /* Amber for fire */
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 30px 0 15px 0;
-            color: var(--text-light);
+            gap: 6px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- 2. Time Blocks with Master Checkbox --- */
+        .time-block {
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        /* Colorful Headers */
+        .block-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            color: white;
             font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
         }
         
-        .time-block-header::after {
-            content: '';
-            flex: 1;
-            height: 2px;
-            background: var(--accent-soft);
-            border-radius: 2px;
+        .block-header:active { transform: scale(0.98); }
+
+        .header-morning { background: var(--grad-morning); }
+        .header-afternoon { background: var(--grad-evening); } /* Swapped for better contrast */
+        .header-evening { background: var(--grad-afternoon); }
+        .header-night { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+
+        .master-check-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
         }
 
-        /* --- Task Cards (Checkboxes) --- */
-        /* We use the checkbox hack to create state without JS */
-        .task-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .master-check-label:hover { background: rgba(255,255,255,0.3); }
+
+        /* --- Task Cards --- */
+        .task-list { display: flex; flex-direction: column; gap: 12px; }
 
         .task-card {
-            background: var(--card-bg);
+            background: white;
             padding: 16px 20px;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow);
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             border: 2px solid transparent;
         }
 
-        .task-card:active {
-            transform: scale(0.98);
+        .task-checkbox { display: none; } /* Hide default checkbox */
+
+        /* Visual Feedback Logic */
+        .task-checkbox:checked + .task-card {
+            background: #f0fdf4; /* Very light green */
+            border-color: #86efac;
+            transform: scale(1.02);
+            box-shadow: var(--success-glow);
         }
 
-        /* Hidden Checkbox */
-        .task-checkbox {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
+        .task-checkbox:checked + .task-card .task-title {
+            color: #15803d;
+            text-decoration: line-through;
+            opacity: 0.7;
         }
 
-        .task-content {
-            display: flex;
-            flex-direction: column;
-            transition: opacity 0.3s ease;
+        .task-checkbox:checked + .task-card .check-circle {
+            background: #22c55e;
+            border-color: #22c55e;
+            transform: rotate(360deg);
         }
 
-        .task-title {
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: var(--text-main);
-        }
-
-        .task-desc {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 2px;
-        }
-
-        /* Custom Check Circle */
-        .check-circle {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-soft);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .task-checkbox:checked + .task-card .check-circle::after {
+            content: '\f00c';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
             color: white;
             font-size: 14px;
         }
 
-        /* --- Checked State Logic (CSS Only) --- */
-        .task-checkbox:checked + .task-card {
-            background-color: #f8fafc;
-            box-shadow: none;
-            border-color: var(--accent-soft);
-        }
-
-        .task-checkbox:checked + .task-card .task-content {
-            opacity: 0.5;
-            text-decoration: line-through;
-        }
-
-        .task-checkbox:checked + .task-card .check-circle {
-            background-color: var(--success);
-            border-color: var(--success);
-            transform: scale(1.1);
-        }
-
-        .task-checkbox:checked + .task-card .check-circle::after {
-            content: '\f00c'; /* FontAwesome Check */
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-        }
-
-        /* --- Icons in Tasks --- */
-        .task-icon {
-            margin-right: 12px;
-            color: #cbd5e1;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .task-checkbox:checked + .task-card .task-icon {
-            color: var(--success);
-        }
-
-        /* --- Sticky Bottom Panel --- */
-        .sticky-panel {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--accent-soft);
-            padding: 15px 20px 25px 20px;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.03);
-        }
-
-        /* Non-Negotiables Grid */
-        .habits-grid {
-            display: flex;
-            justify-content: space-between;
-            max-width: 600px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .habit-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-light);
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .habit-icon-box {
-            width: 45px;
-            height: 45px;
-            background: #f1f5f9;
-            border-radius: 14px;
+        /* Check Circle Style */
+        .check-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid #cbd5e1;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            color: #64748b;
-            transition: all 0.2s ease;
+            transition: all 0.4s ease;
         }
 
-        /* Hover/Touch effects for habits */
-        .habit-item:hover .habit-icon-box {
-            background: #e0f2fe;
-            color: #0ea5e9;
-            transform: translateY(-2px);
+        .task-content { flex: 1; }
+        .task-title { font-weight: 700; font-size: 1rem; color: var(--text-main); transition: color 0.3s; }
+        .task-desc { font-size: 0.8rem; color: var(--text-light); }
+        .task-icon { margin-right: 10px; color: #94a3b8; width: 20px; text-align: center; }
+
+        /* --- NEW SECTION: My Journey (Calendar) --- */
+        .journey-section {
+            margin-top: 40px;
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
         }
 
-        /* --- Progress Strip --- */
-        .progress-container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
+        .journey-header {
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
+        .journey-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .journey-subtitle {
             font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #334155;
+            color: var(--text-light);
         }
 
-        .progress-bar-bg {
-            width: 100%;
-            height: 8px;
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+            gap: 8px;
+        }
+
+        .day-card {
+            aspect-ratio: 1;
             background: #f1f5f9;
             border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #94a3b8;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        /* Journey Card States - COLOR CODED */
+        .day-card.perfect { background: #86efac; color: #064e3b; box-shadow: 0 2px 8px rgba(134, 239, 172, 0.4); } /* 100% */
+        .day-card.good { background: #93c5fd; color: #1e3a8a; } /* 70-99% */
+        .day-card.okay { background: #fcd34d; color: #78350f; } /* 30-69% */
+        .day-card.low { background: #fca5a5; color: #7f1d1d; } /* 1-29% */
+        
+        .day-card.current {
+            background: white;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            transform: scale(1.05);
+            z-index: 2;
+        }
+
+        .day-card.missed {
+            background: #e2e8f0;
+            color: #94a3b8;
+            opacity: 0.6;
+        }
+
+        /* --- 3. Celebration Modal --- */
+        #celebration-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        
+        #celebration-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .celebration-content h2 {
+            font-size: 2rem;
+            color: #334155;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .celebration-content p {
+            color: #64748b;
+            text-align: center;
+        }
+
+        /* --- 4. Footer & Progress --- */
+        .sticky-footer {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid #f1f5f9;
+            padding: 15px 20px 30px;
+            z-index: 500;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Day Complete Button */
+        .btn-complete-day {
+            width: 100%;
+            padding: 16px;
+            background: var(--text-main);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(51, 65, 85, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-complete-day:active { transform: scale(0.97); }
+        
+        /* Progress Bar */
+        .progress-container { width: 100%; }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 10px;
+            background: #f1f5f9;
+            border-radius: 20px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            width: 1.6%; /* Day 1 of 60 */
-            background: linear-gradient(90deg, #7dd3fc, #60a5fa);
-            border-radius: 10px;
+            width: 0%;
+            background: linear-gradient(90deg, #34d399, #3b82f6);
+            border-radius: 20px;
+            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* --- Animations --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Confetti Animation (CSS only representation) */
+        @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .pop-anim { animation: pop 0.3s ease; }
 
-        /* Desktop Adjustments */
         @media (min-width: 768px) {
-            body {
-                background-color: #f1f5f9; /* Darker bg outside app on desktop */
-                padding-bottom: 40px;
-            }
-            .app-container {
-                background: var(--bg-color);
-                margin-top: 40px;
-                border-radius: 40px;
-                box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-                min-height: 90vh;
-                padding-bottom: 160px; /* Ensure space for sticky inside container */
-            }
-            .sticky-panel {
-                position: absolute; /* Stick to bottom of container, not screen */
-                border-bottom-left-radius: 40px;
-                border-bottom-right-radius: 40px;
-            }
+            .app-container { margin-top: 40px; padding-bottom: 200px; }
+            .sticky-footer { max-width: 600px; left: 50%; transform: translateX(-50%); border-radius: 20px 20px 0 0; }
         }
     </style>
 </head>
@@ -320,211 +366,357 @@
 
 <div class="app-container">
     
-    <!-- 1. Header -->
+    <!-- HEADER -->
     <header>
-        <h1>My Reset Plan</h1>
-        <div class="subtitle">Gut • Energy • Body • Youth</div>
+        <div class="header-text">
+            <h1>Reset Plan</h1>
+            <div class="subtitle">Dopamine & Drive</div>
+        </div>
+        <div class="streak-badge">
+            <i class="fa-solid fa-fire"></i> <span id="streak-display">Streak: 0</span>
+        </div>
     </header>
 
-    <!-- 2. Today's Routine -->
-    <main>
-        
-        <!-- Morning Block -->
-        <div class="time-block-header">
-            <i class="fa-regular fa-sun"></i> Morning
+    <!-- MORNING BLOCK -->
+    <div class="time-block" id="block-morning">
+        <div class="block-header header-morning">
+            <span><i class="fa-regular fa-sun"></i> Morning</span>
+            <div class="master-check-label" onclick="toggleBlock('morning')">
+                <i class="fa-solid fa-check-double"></i> Check All
+            </div>
         </div>
-        
         <div class="task-list">
-            <input type="checkbox" id="task1" class="task-checkbox">
-            <label for="task1" class="task-card">
+            <input type="checkbox" id="t1" class="task-checkbox" onchange="updateProgress()">
+            <label for="t1" class="task-card">
                 <div class="task-content">
                     <div class="task-title"><i class="fa-solid fa-glass-water task-icon"></i>Wake + Water</div>
-                    <div class="task-desc">Hydrate before anything else.</div>
+                    <div class="task-desc">Start the engine.</div>
                 </div>
                 <div class="check-circle"></div>
             </label>
 
-            <input type="checkbox" id="task2" class="task-checkbox">
-            <label for="task2" class="task-card">
+            <input type="checkbox" id="t2" class="task-checkbox" onchange="updateProgress()">
+            <label for="t2" class="task-card">
                 <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-capsules task-icon"></i>Supplements</div>
-                    <div class="task-desc">Vitamin D3 + K2 • B12</div>
-                </div>
-                <div class="check-circle"></div>
-            </label>
-
-            <input type="checkbox" id="task3" class="task-checkbox">
-            <label for="task3" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-bacterium task-icon"></i>Probiotic</div>
-                    <div class="task-desc">Gut health foundation.</div>
-                </div>
-                <div class="check-circle"></div>
-            </label>
-
-            <input type="checkbox" id="task4" class="task-checkbox">
-            <label for="task4" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-lungs task-icon"></i>10 min Breathing</div>
-                    <div class="task-desc">Box breathing or Wim Hof.</div>
+                    <div class="task-title"><i class="fa-solid fa-capsules task-icon"></i>Vitamins</div>
+                    <div class="task-desc">D3 • K2 • B12</div>
                 </div>
                 <div class="check-circle"></div>
             </label>
             
-            <input type="checkbox" id="task5" class="task-checkbox">
-            <label for="task5" class="task-card">
+            <input type="checkbox" id="t3" class="task-checkbox" onchange="updateProgress()">
+            <label for="t3" class="task-card">
                 <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-person-walking task-icon"></i>10 min Easy Walk</div>
-                    <div class="task-desc">Morning sunlight exposure.</div>
+                    <div class="task-title"><i class="fa-solid fa-person-walking task-icon"></i>Movement</div>
+                    <div class="task-desc">10m walk or stretch.</div>
                 </div>
                 <div class="check-circle"></div>
             </label>
         </div>
+    </div>
 
-        <!-- Afternoon Block -->
-        <div class="time-block-header">
-            <i class="fa-regular fa-clock"></i> Afternoon
+    <!-- AFTERNOON BLOCK -->
+    <div class="time-block" id="block-afternoon">
+        <div class="block-header header-evening">
+            <span><i class="fa-regular fa-clock"></i> Afternoon</span>
+            <div class="master-check-label" onclick="toggleBlock('afternoon')">
+                <i class="fa-solid fa-check-double"></i> Check All
+            </div>
         </div>
-
         <div class="task-list">
-            <input type="checkbox" id="task6" class="task-checkbox">
-            <label for="task6" class="task-card">
+            <input type="checkbox" id="t4" class="task-checkbox" onchange="updateProgress()">
+            <label for="t4" class="task-card">
                 <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-bowl-food task-icon"></i>Balanced Lunch</div>
-                    <div class="task-desc">High protein, healthy fats.</div>
+                    <div class="task-title"><i class="fa-solid fa-bowl-food task-icon"></i>High Protein Lunch</div>
+                    <div class="task-desc">Fuel focus.</div>
                 </div>
                 <div class="check-circle"></div>
             </label>
 
-            <input type="checkbox" id="task7" class="task-checkbox">
-            <label for="task7" class="task-card">
+            <input type="checkbox" id="t5" class="task-checkbox" onchange="updateProgress()">
+            <label for="t5" class="task-card">
                 <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-person-stretching task-icon"></i>Movement / Stretch</div>
-                    <div class="task-desc">Break the sedentary cycle.</div>
+                    <div class="task-title"><i class="fa-solid fa-arrows-rotate task-icon"></i>Reset Break</div>
+                    <div class="task-desc">Step away from screens.</div>
                 </div>
                 <div class="check-circle"></div>
             </label>
         </div>
+    </div>
 
-        <!-- Evening Block -->
-        <div class="time-block-header">
-            <i class="fa-regular fa-moon"></i> Evening
+    <!-- EVENING BLOCK -->
+    <div class="time-block" id="block-evening">
+        <div class="block-header header-afternoon">
+            <span><i class="fa-regular fa-moon"></i> Evening</span>
+            <div class="master-check-label" onclick="toggleBlock('evening')">
+                <i class="fa-solid fa-check-double"></i> Check All
+            </div>
         </div>
-
         <div class="task-list">
-            <input type="checkbox" id="task8" class="task-checkbox">
-            <label for="task8" class="task-card">
+            <input type="checkbox" id="t6" class="task-checkbox" onchange="updateProgress()">
+            <label for="t6" class="task-card">
                 <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-carrot task-icon"></i>Light Dinner</div>
-                    <div class="task-desc">Easy to digest.</div>
+                    <div class="task-title"><i class="fa-solid fa-carrot task-icon"></i>Clean Dinner</div>
+                    <div class="task-desc">No sugar / No dairy.</div>
                 </div>
                 <div class="check-circle"></div>
             </label>
 
-            <input type="checkbox" id="task9" class="task-checkbox">
-            <label for="task9" class="task-card">
+            <input type="checkbox" id="t7" class="task-checkbox" onchange="updateProgress()">
+            <label for="t7" class="task-card">
                 <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-ban task-icon"></i>No Sugar / Dairy</div>
-                    <div class="task-desc">Reduce inflammation.</div>
-                </div>
-                <div class="check-circle"></div>
-            </label>
-
-            <input type="checkbox" id="task10" class="task-checkbox">
-            <label for="task10" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-book-open task-icon"></i>Wind Down</div>
-                    <div class="task-desc">Reading or journaling.</div>
+                    <div class="task-title"><i class="fa-solid fa-book task-icon"></i>Wind Down</div>
+                    <div class="task-desc">Analog mode. No phones.</div>
                 </div>
                 <div class="check-circle"></div>
             </label>
         </div>
+    </div>
 
-        <!-- Night Block -->
-        <div class="time-block-header">
-            <i class="fa-solid fa-bed"></i> Night
+    <!-- NIGHT BLOCK -->
+    <div class="time-block" id="block-night">
+        <div class="block-header header-night">
+            <span><i class="fa-solid fa-bed"></i> Night</span>
+            <div class="master-check-label" onclick="toggleBlock('night')">
+                <i class="fa-solid fa-check-double"></i> Check All
+            </div>
         </div>
-
         <div class="task-list">
-            <input type="checkbox" id="task11" class="task-checkbox">
-            <label for="task11" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-glass-water-droplet task-icon"></i>Psyllium Husk</div>
-                    <div class="task-desc">Fiber intake.</div>
-                </div>
-                <div class="check-circle"></div>
-            </label>
-
-            <input type="checkbox" id="task12" class="task-checkbox">
-            <label for="task12" class="task-card">
+            <input type="checkbox" id="t8" class="task-checkbox" onchange="updateProgress()">
+            <label for="t8" class="task-card">
                 <div class="task-content">
                     <div class="task-title"><i class="fa-solid fa-tablets task-icon"></i>Magnesium</div>
-                    <div class="task-desc">For muscle relaxation.</div>
+                    <div class="task-desc">Deep sleep protocol.</div>
                 </div>
                 <div class="check-circle"></div>
             </label>
 
-            <input type="checkbox" id="task13" class="task-checkbox">
-            <label for="task13" class="task-card">
+            <input type="checkbox" id="t9" class="task-checkbox" onchange="updateProgress()">
+            <label for="t9" class="task-card">
                 <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-mobile-screen-button task-icon"></i>Screens Off</div>
-                    <div class="task-desc">1 hour before bed.</div>
-                </div>
-                <div class="check-circle"></div>
-            </label>
-
-             <input type="checkbox" id="task14" class="task-checkbox">
-            <label for="task14" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-mattress-pillow task-icon"></i>Sleep 7-8 Hrs</div>
-                    <div class="task-desc">Recovery is priority.</div>
+                    <div class="task-title"><i class="fa-solid fa-moon task-icon"></i>Sleep</div>
+                    <div class="task-desc">7-8 hours non-negotiable.</div>
                 </div>
                 <div class="check-circle"></div>
             </label>
         </div>
+    </div>
 
-    </main>
+    <!-- JOURNEY SECTION -->
+    <section class="journey-section">
+        <div class="journey-header">
+            <div class="journey-title">Your nervous system is learning consistency.</div>
+            <div class="journey-subtitle" id="journey-stats">Completed: 0 / 60 days</div>
+        </div>
+        <div class="journey-grid" id="journey-grid">
+            <!-- Grid generated by JS -->
+        </div>
+    </section>
 
-    <!-- 3. & 4. Sticky Panel & Progress -->
-    <footer class="sticky-panel">
-        
-        <!-- Progress Strip -->
+    <!-- CELEBRATION OVERLAY -->
+    <div id="celebration-overlay">
+        <div class="celebration-content">
+            <i class="fa-solid fa-medal" style="font-size: 4rem; color: #fbbf24; margin-bottom: 20px;"></i>
+            <h2>Amazing Work.</h2>
+            <p>Your nervous system is healing.</p>
+            <p style="margin-top: 20px; font-weight: bold; color: #334155;">Streak Updated!</p>
+            <button onclick="closeOverlay()" style="margin-top: 30px; padding: 10px 25px; border: none; background: #334155; color: white; border-radius: 10px; cursor: pointer;">Close & Next Day</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="sticky-footer">
+        <!-- Progress -->
         <div class="progress-container">
-            <div class="progress-text">
-                <span>Day 1 / 60</span>
-                <span>Keep going.</span>
+            <div class="progress-header">
+                <span id="progress-text">Progress: 0%</span>
+                <span>Level Up</span>
             </div>
-            <div class="progress-bar-bg">
-                <div class="progress-fill"></div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
             </div>
         </div>
 
-        <!-- Non-Negotiables Grid -->
-        <div class="habits-grid">
-            <div class="habit-item">
-                <div class="habit-icon-box"><i class="fa-solid fa-droplet"></i></div>
-                <span>Water</span>
-            </div>
-            <div class="habit-item">
-                <div class="habit-icon-box"><i class="fa-solid fa-person-walking"></i></div>
-                <span>Walk</span>
-            </div>
-            <div class="habit-item">
-                <div class="habit-icon-box"><i class="fa-solid fa-lungs"></i></div>
-                <span>Breath</span>
-            </div>
-            <div class="habit-item">
-                <div class="habit-icon-box"><i class="fa-solid fa-leaf"></i></div>
-                <span>Eat Clean</span>
-            </div>
-            <div class="habit-item">
-                <div class="habit-icon-box"><i class="fa-solid fa-bed"></i></div>
-                <span>Sleep</span>
-            </div>
-        </div>
+        <!-- Day Complete Button -->
+        <button class="btn-complete-day" onclick="completeDay()">
+            FINISH DAY <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
+        </button>
     </footer>
 
 </div>
+
+<!-- Minimal Interaction Script -->
+<script>
+    // 1. Initialize State
+    let streak = parseInt(localStorage.getItem('resetStreak')) || 0;
+    // Track which days are "Done" (stores the Percentage 0-100)
+    let completedDays = JSON.parse(localStorage.getItem('completedDays')) || []; 
+    // Track the current active day (0 to 59)
+    let currentDayIndex = parseInt(localStorage.getItem('currentDayIndex')) || 0; 
+    
+    // Limits
+    const TOTAL_DAYS = 60;
+
+    // Display Streak
+    document.getElementById('streak-display').innerText = `Streak: ${streak}`;
+
+    // 2. Render Journey Grid
+    function renderJourneyGrid() {
+        const grid = document.getElementById('journey-grid');
+        grid.innerHTML = ''; // Clear
+        
+        let completedCount = 0;
+
+        for (let i = 0; i < TOTAL_DAYS; i++) {
+            const dayNum = i + 1;
+            const el = document.createElement('div');
+            el.className = 'day-card';
+            el.innerText = dayNum;
+
+            const val = completedDays[i];
+            
+            // Handle backwards compatibility (if 'true' was stored)
+            let percent = (val === true) ? 100 : val;
+
+            if (percent !== undefined && percent !== null) {
+                // Determine Color Class based on %
+                if (percent === 100) {
+                    el.classList.add('perfect');
+                } else if (percent >= 70) {
+                    el.classList.add('good');
+                } else if (percent >= 30) {
+                    el.classList.add('okay');
+                } else if (percent > 0) {
+                    el.classList.add('low');
+                } else {
+                    el.classList.add('missed'); // 0%
+                }
+                
+                if (percent >= 30) completedCount++; // Count "good enough" days
+            } else if (i === currentDayIndex) {
+                el.classList.add('current');
+            } else if (i < currentDayIndex) {
+                // Past days not logged
+                el.classList.add('missed');
+            }
+
+            grid.appendChild(el);
+        }
+
+        // Update Stats Text
+        document.getElementById('journey-stats').innerText = `Logged: ${completedCount} / ${TOTAL_DAYS} days`;
+    }
+
+    // 3. Update Progress Bar Logic
+    function updateProgress() {
+        const checkboxes = document.querySelectorAll('.task-checkbox');
+        const checked = document.querySelectorAll('.task-checkbox:checked');
+        
+        const total = checkboxes.length;
+        const count = checked.length;
+        const percent = total === 0 ? 0 : Math.round((count / total) * 100);
+
+        // Update visual bar
+        document.getElementById('progress-fill').style.width = percent + '%';
+        document.getElementById('progress-text').innerText = `Progress: ${percent}%`;
+    }
+
+    // 4. Master Checkbox Logic (Auto-check block)
+    function toggleBlock(blockName) {
+        const block = document.getElementById(`block-${blockName}`);
+        const inputs = block.querySelectorAll('input[type="checkbox"]');
+        const allChecked = Array.from(inputs).every(input => input.checked);
+        inputs.forEach(input => { input.checked = !allChecked; });
+        updateProgress();
+    }
+
+    // 5. Complete Day Logic (The Big Button)
+    function completeDay() {
+        const checkboxes = document.querySelectorAll('.task-checkbox');
+        const checked = document.querySelectorAll('.task-checkbox:checked');
+        
+        // Calculate actual percentage done right now
+        const total = checkboxes.length;
+        const count = checked.length;
+        const percent = total === 0 ? 0 : Math.round((count / total) * 100);
+
+        // DO NOT auto-check unchecked boxes. 
+        // We accept the user's truth.
+
+        triggerCelebration(percent);
+    }
+
+    // 6. Celebration & Journey Logic
+    function triggerCelebration(percent) {
+        const overlay = document.getElementById('celebration-overlay');
+        const title = overlay.querySelector('h2');
+        const msg = overlay.querySelector('p');
+
+        // Custom message based on effort
+        if (percent === 100) {
+            title.innerText = "Perfect Day!";
+            msg.innerText = "Your nervous system is healing.";
+        } else if (percent >= 70) {
+            title.innerText = "Great Job!";
+            msg.innerText = "Consistency over perfection.";
+        } else if (percent > 0) {
+            title.innerText = "Day Logged.";
+            msg.innerText = "Every small step counts.";
+        } else {
+            title.innerText = "Rest Day?";
+            msg.innerText = "Tomorrow is a new start.";
+        }
+
+        overlay.classList.add('active');
+
+        // Logic: Mark today as done with the specific percentage
+        if (completedDays[currentDayIndex] === undefined || completedDays[currentDayIndex] === null) {
+            completedDays[currentDayIndex] = percent;
+            
+            // Streak Logic: Reset on 0%, Increment on >0%
+            if (percent > 0) {
+                streak++;
+            } else {
+                streak = 0;
+            }
+        }
+        
+        // Save
+        localStorage.setItem('resetStreak', streak);
+        localStorage.setItem('completedDays', JSON.stringify(completedDays));
+        
+        // Update Streak UI
+        document.getElementById('streak-display').innerText = `Streak: ${streak}`;
+    }
+
+    function closeOverlay() {
+        const overlay = document.getElementById('celebration-overlay');
+        overlay.classList.remove('active');
+        
+        setTimeout(() => {
+            // Reset daily checkboxes
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            checkboxes.forEach(box => { box.checked = false; });
+            updateProgress();
+            
+            // Advance Day
+            if(currentDayIndex < TOTAL_DAYS - 1) {
+                currentDayIndex++;
+                localStorage.setItem('currentDayIndex', currentDayIndex);
+            }
+
+            // Re-render Grid
+            renderJourneyGrid();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 500); 
+    }
+
+    // Run on load
+    updateProgress();
+    renderJourneyGrid();
+</script>
 
 </body>
 </html>
