@@ -326,6 +326,29 @@
         }
 
         .btn-complete-day:active { transform: scale(0.97); }
+
+        /* New Day Button */
+        .btn-new-day {
+            width: 100%;
+            padding: 12px;
+            background: #f1f5f9;
+            color: var(--text-main);
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-new-day:hover {
+            background: #e2e8f0;
+            border-color: #94a3b8;
+        }
+
+        .btn-new-day:active { transform: scale(0.97); }
         
         /* Progress Bar */
         .progress-container { width: 100%; }
@@ -544,6 +567,11 @@
         <button class="btn-complete-day" onclick="completeDay()">
             FINISH DAY <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
         </button>
+
+        <!-- New Day Button -->
+        <button class="btn-new-day" onclick="startNewDay()">
+            <i class="fa-solid fa-calendar-day" style="margin-right: 8px;"></i>New Day
+        </button>
     </footer>
 
 </div>
@@ -559,6 +587,94 @@
     
     // Limits
     const TOTAL_DAYS = 60;
+
+    // Storage keys
+    const STORAGE_KEYS = {
+        CHECKBOXES: 'resetPlanCheckboxes',
+        PROGRESS: 'resetPlanProgress',
+        LAST_DATE: 'resetPlanLastDate'
+    };
+
+    // 2. Save checkbox states to localStorage
+    function saveCheckboxStates() {
+        const checkboxes = document.querySelectorAll('.task-checkbox');
+        const checkboxStates = {};
+        checkboxes.forEach(checkbox => {
+            checkboxStates[checkbox.id] = checkbox.checked;
+        });
+        localStorage.setItem(STORAGE_KEYS.CHECKBOXES, JSON.stringify(checkboxStates));
+    }
+
+    // 3. Restore checkbox states from localStorage
+    function restoreCheckboxStates() {
+        const saved = localStorage.getItem(STORAGE_KEYS.CHECKBOXES);
+        if (saved) {
+            try {
+                const checkboxStates = JSON.parse(saved);
+                Object.keys(checkboxStates).forEach(id => {
+                    const checkbox = document.getElementById(id);
+                    if (checkbox) {
+                        checkbox.checked = checkboxStates[id];
+                    }
+                });
+            } catch (e) {
+                console.error('Error restoring checkbox states:', e);
+            }
+        }
+    }
+
+    // 4. Save progress to localStorage
+    function saveProgress() {
+        const checkboxes = document.querySelectorAll('.task-checkbox');
+        const checked = document.querySelectorAll('.task-checkbox:checked');
+        const total = checkboxes.length;
+        const count = checked.length;
+        const percent = total === 0 ? 0 : Math.round((count / total) * 100);
+        localStorage.setItem(STORAGE_KEYS.PROGRESS, percent.toString());
+    }
+
+    // 5. Restore progress from localStorage
+    function restoreProgress() {
+        const saved = localStorage.getItem(STORAGE_KEYS.PROGRESS);
+        if (saved) {
+            const percent = parseInt(saved);
+            document.getElementById('progress-fill').style.width = percent + '%';
+            document.getElementById('progress-text').innerText = `Progress: ${percent}%`;
+        }
+    }
+
+    // 6. Check if it's a new day
+    function isNewDay() {
+        const today = new Date().toDateString();
+        const lastDate = localStorage.getItem(STORAGE_KEYS.LAST_DATE);
+        return lastDate !== today;
+    }
+
+    // 7. Update last active date
+    function updateLastDate() {
+        const today = new Date().toDateString();
+        localStorage.setItem(STORAGE_KEYS.LAST_DATE, today);
+    }
+
+    // 8. Initialize on page load
+    function initializeApp() {
+        // Check if it's a new day - if so, reset checkboxes but keep history
+        if (isNewDay()) {
+            // Clear daily checkboxes but keep streak and completedDays
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            checkboxes.forEach(box => { box.checked = false; });
+            saveCheckboxStates();
+            saveProgress();
+            updateLastDate();
+        } else {
+            // Restore saved states
+            restoreCheckboxStates();
+            restoreProgress();
+        }
+        
+        // Always update progress display
+        updateProgress();
+    }
 
     // Display Streak
     document.getElementById('streak-display').innerText = `Streak: ${streak}`;
@@ -622,6 +738,10 @@
         // Update visual bar
         document.getElementById('progress-fill').style.width = percent + '%';
         document.getElementById('progress-text').innerText = `Progress: ${percent}%`;
+        
+        // Save progress and checkbox states immediately
+        saveProgress();
+        saveCheckboxStates();
     }
 
     // 4. Master Checkbox Logic (Auto-check block)
@@ -630,7 +750,7 @@
         const inputs = block.querySelectorAll('input[type="checkbox"]');
         const allChecked = Array.from(inputs).every(input => input.checked);
         inputs.forEach(input => { input.checked = !allChecked; });
-        updateProgress();
+        updateProgress(); // This will save states automatically
     }
 
     // 5. Complete Day Logic (The Big Button)
@@ -687,6 +807,8 @@
         // Save
         localStorage.setItem('resetStreak', streak);
         localStorage.setItem('completedDays', JSON.stringify(completedDays));
+        saveCheckboxStates(); // Save checkbox states
+        saveProgress(); // Save progress
         
         // Update Streak UI
         document.getElementById('streak-display').innerText = `Streak: ${streak}`;
@@ -700,6 +822,7 @@
             // Reset daily checkboxes
             const checkboxes = document.querySelectorAll('.task-checkbox');
             checkboxes.forEach(box => { box.checked = false; });
+            saveCheckboxStates(); // Save reset state
             updateProgress();
             
             // Advance Day
@@ -716,8 +839,37 @@
         }, 500); 
     }
 
+    // 9. New Day Button Function
+    function startNewDay() {
+        if (confirm('Start a new day? This will reset your checkboxes but keep your streak and progress history.')) {
+            // Reset only daily checkboxes
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            checkboxes.forEach(box => { box.checked = false; });
+            
+            // Save the reset state
+            saveCheckboxStates();
+            saveProgress();
+            
+            // Advance to next day
+            if(currentDayIndex < TOTAL_DAYS - 1) {
+                currentDayIndex++;
+                localStorage.setItem('currentDayIndex', currentDayIndex);
+            }
+            
+            // Update last date
+            updateLastDate();
+            
+            // Update UI
+            updateProgress();
+            renderJourneyGrid();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
     // Run on load
-    updateProgress();
+    initializeApp();
     renderJourneyGrid();
 </script>
 
