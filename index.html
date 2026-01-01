@@ -50,7 +50,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             padding-top: 10px;
         }
 
@@ -59,6 +59,7 @@
             font-weight: 800;
             margin: 0;
             background: -webkit-linear-gradient(45deg, #334155, #64748b);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -91,6 +92,175 @@
             100% { transform: translateY(0px); }
         }
 
+        /* --- NEW: Tab Navigation --- */
+        .tab-nav {
+            display: flex;
+            background: white;
+            padding: 5px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            border-radius: 40px;
+            font-weight: 700;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn.active {
+            background: #e0f2fe; /* Light Blue */
+            color: #0284c7;
+            box-shadow: 0 2px 10px rgba(186, 230, 253, 0.5);
+        }
+
+        /* --- NEW: Guide Cards (Educational) --- */
+        .guide-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border-left: 6px solid #e2e8f0; /* Default neutral border */
+            transition: transform 0.2s;
+        }
+
+        .guide-card:active { transform: scale(0.99); }
+
+        .guide-card.diet { border-color: #f59e0b; } /* Orange for warm food */
+        .guide-card.move { border-color: #3b82f6; } /* Blue for movement */
+        .guide-card.alert { border-color: #ef4444; } /* Red for safety */
+
+        .guide-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #334155;
+        }
+
+        .guide-content {
+            font-size: 0.95rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .rule-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #f1f5f9;
+        }
+
+        .rule-list { list-style: none; padding: 0; margin: 0; }
+        .rule-list li { margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
+        .rule-list i { margin-top: 4px; }
+        .good { color: #10b981; }
+        .bad { color: #ef4444; }
+
+        /* Vision Inputs */
+        .vision-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.9rem;
+            color: #334155;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        .vision-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        /* Rule Item */
+        .rule-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        .rule-item-text {
+            flex: 1;
+            font-weight: 600;
+            color: #334155;
+        }
+        .rule-item-delete {
+            background: #fee2e2;
+            color: #991b1b;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .rule-item-delete:active { transform: scale(0.95); }
+
+        /* Weekly Focus Items */
+        .weekly-focus-item {
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        /* Counter UI for System Tab */
+        .counter-ui {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f1f5f9;
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .counter-label { font-weight: 700; color: #475569; font-size: 0.9rem; }
+
+        .btn-count {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            color: #334155;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        
+        .btn-count:active { background: #e2e8f0; }
+
+        .count-display { 
+            font-weight: 800; 
+            font-size: 1.1rem; 
+            color: #334155; 
+            min-width: 25px;
+            text-align: center;
+        }
+
         /* --- 2. Time Blocks with Master Checkbox --- */
         .time-block {
             margin-bottom: 35px;
@@ -114,7 +284,7 @@
         .block-header:active { transform: scale(0.98); }
 
         .header-morning { background: var(--grad-morning); }
-        .header-afternoon { background: var(--grad-evening); } /* Swapped for better contrast */
+        .header-afternoon { background: var(--grad-evening); }
         .header-evening { background: var(--grad-afternoon); }
         .header-night { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
 
@@ -349,6 +519,22 @@
         }
 
         .btn-new-day:active { transform: scale(0.97); }
+
+        /* Symptom Buttons */
+        .symptom-btn {
+            padding: 10px;
+            border: 2px solid;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .symptom-btn:active { transform: scale(0.95); }
+        .symptom-btn.active {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+            transform: scale(1.05);
+        }
         
         /* Progress Bar */
         .progress-container { width: 100%; }
@@ -378,10 +564,6 @@
             transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* Confetti Animation (CSS only representation) */
-        @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-        .pop-anim { animation: pop 0.3s ease; }
-
         @media (min-width: 768px) {
             .app-container { margin-top: 40px; padding-bottom: 200px; }
             .sticky-footer { max-width: 600px; left: 50%; transform: translateX(-50%); border-radius: 20px 20px 0 0; }
@@ -403,141 +585,553 @@
         </div>
     </header>
 
-    <!-- MORNING BLOCK -->
-    <div class="time-block" id="block-morning">
-        <div class="block-header header-morning">
-            <span><i class="fa-regular fa-sun"></i> Morning</span>
-            <div class="master-check-label" onclick="toggleBlock('morning')">
-                <i class="fa-solid fa-check-double"></i> Check All
+    <!-- TAB NAVIGATION -->
+    <div class="tab-nav">
+        <button id="btn-northstar" class="tab-btn" onclick="switchTab('northstar')">
+            <i class="fa-solid fa-compass" style="margin-right:5px;"></i> North Star
+        </button>
+        <button id="btn-daily" class="tab-btn active" onclick="switchTab('daily')">
+            <i class="fa-solid fa-list-check" style="margin-right:5px;"></i> Daily
+        </button>
+        <button id="btn-system" class="tab-btn" onclick="switchTab('system')">
+            <i class="fa-solid fa-book-medical" style="margin-right:5px;"></i> System
+        </button>
+        <button id="btn-metrics" class="tab-btn" onclick="switchTab('metrics')">
+            <i class="fa-solid fa-chart-line" style="margin-right:5px;"></i> Metrics
+        </button>
+    </div>
+
+    <!-- TAB 0: NORTH STAR MODULE -->
+    <div id="view-northstar" class="tab-content" style="display: none;">
+        <!-- VISION SECTION -->
+        <div class="guide-card" style="border-color: #8b5cf6;">
+            <div class="guide-title"><i class="fa-solid fa-eye" style="color:#8b5cf6;"></i> Vision</div>
+            <div class="guide-content">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 700; margin-bottom: 8px; color: #334155;">60-Day Identity</label>
+                    <textarea id="vision-60day" class="vision-input" placeholder="Who am I becoming in 60 days? (e.g., 'I am someone who prioritizes gut healing and moves daily without breathlessness')" rows="3"></textarea>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 700; margin-bottom: 8px; color: #334155;">12-Month Identity</label>
+                    <textarea id="vision-12month" class="vision-input" placeholder="Who am I becoming in 12 months? (e.g., 'I am strong, symptom-free, and trust my body completely')" rows="3"></textarea>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 700; margin-bottom: 8px; color: #334155;">Why This System Exists</label>
+                    <textarea id="vision-why" class="vision-input" placeholder="Your deeper reason for transformation..." rows="3"></textarea>
+                </div>
+                <div>
+                    <label style="display: block; font-weight: 700; margin-bottom: 8px; color: #334155;">What Success Looks Like</label>
+                    <textarea id="vision-success" class="vision-input" placeholder="How will you know you've succeeded? (e.g., 'No bloating, can walk 30min without breathlessness, lost 15lbs')" rows="3"></textarea>
+                </div>
             </div>
         </div>
-        <div class="task-list">
-            <input type="checkbox" id="t1" class="task-checkbox" onchange="updateProgress()">
-            <label for="t1" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-glass-water task-icon"></i>Wake + Water</div>
-                    <div class="task-desc">Start the engine.</div>
-                </div>
-                <div class="check-circle"></div>
-            </label>
 
-            <input type="checkbox" id="t2" class="task-checkbox" onchange="updateProgress()">
-            <label for="t2" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-capsules task-icon"></i>Vitamins</div>
-                    <div class="task-desc">D3 • K2 • B12</div>
+        <!-- PERSONAL RULES ENGINE -->
+        <div class="guide-card" style="border-color: #f59e0b;">
+            <div class="guide-title"><i class="fa-solid fa-shield-halved" style="color:#f59e0b;"></i> Personal Rules Engine</div>
+            <div class="guide-content">
+                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 15px;">These rules influence all system recommendations. Add or edit your non-negotiables:</p>
+                <div id="rules-list" style="margin-bottom: 20px;">
+                    <!-- Rules will be dynamically generated -->
                 </div>
-                <div class="check-circle"></div>
-            </label>
-            
-            <input type="checkbox" id="t3" class="task-checkbox" onchange="updateProgress()">
-            <label for="t3" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-person-walking task-icon"></i>Movement</div>
-                    <div class="task-desc">10m walk or stretch.</div>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="new-rule-input" placeholder="Add new rule (e.g., 'No dairy')" style="flex: 1; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem;">
+                    <button onclick="addRule()" style="padding: 10px 20px; background: #f59e0b; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">Add</button>
                 </div>
-                <div class="check-circle"></div>
-            </label>
+            </div>
+        </div>
+
+        <!-- TOMORROW'S FOCUS PREVIEW -->
+        <div class="guide-card" style="border-color: #3b82f6; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);">
+            <div class="guide-title"><i class="fa-solid fa-calendar-day" style="color:#3b82f6;"></i> Tomorrow's Focus</div>
+            <div class="guide-content">
+                <div id="tomorrow-focus" style="font-size: 1.1rem; font-weight: 800; color: #1e40af; text-align: center; padding: 15px; background: white; border-radius: 12px; margin-top: 10px;">
+                    <span id="focus-mode">Stabilize</span>
+                </div>
+                <p id="focus-explanation" style="font-size: 0.85rem; color: #475569; text-align: center; margin-top: 10px; font-style: italic;">
+                    Based on today's completion and symptoms
+                </p>
+            </div>
         </div>
     </div>
 
-    <!-- AFTERNOON BLOCK -->
-    <div class="time-block" id="block-afternoon">
-        <div class="block-header header-evening">
-            <span><i class="fa-regular fa-clock"></i> Afternoon</span>
-            <div class="master-check-label" onclick="toggleBlock('afternoon')">
-                <i class="fa-solid fa-check-double"></i> Check All
+    <!-- TAB 1: DAILY ROUTINE -->
+    <div id="view-daily" class="tab-content">
+        <!-- MORNING BLOCK -->
+        <div class="time-block" id="block-morning">
+            <div class="block-header header-morning">
+                <span><i class="fa-regular fa-sun"></i> Morning</span>
+                <div class="master-check-label" onclick="toggleBlock('morning')">
+                    <i class="fa-solid fa-check-double"></i> Check All
+                </div>
+            </div>
+            <div class="task-list">
+                <input type="checkbox" id="t1" class="task-checkbox" onchange="updateProgress()">
+                <label for="t1" class="task-card">
+                    <div class="task-content">
+                        <div class="task-title"><i class="fa-solid fa-glass-water task-icon"></i>Wake + Water</div>
+                        <div class="task-desc">Start the engine.</div>
+                    </div>
+                    <div class="check-circle"></div>
+                </label>
+
+                <input type="checkbox" id="t2" class="task-checkbox" onchange="updateProgress()">
+                <label for="t2" class="task-card">
+                    <div class="task-content">
+                        <div class="task-title"><i class="fa-solid fa-capsules task-icon"></i>Vitamins</div>
+                        <div class="task-desc">D3 • K2 • B12</div>
+                    </div>
+                    <div class="check-circle"></div>
+                </label>
+                
+                <input type="checkbox" id="t3" class="task-checkbox" onchange="updateProgress()">
+                <label for="t3" class="task-card">
+                    <div class="task-content">
+                        <div class="task-title"><i class="fa-solid fa-person-walking task-icon"></i>Movement</div>
+                        <div class="task-desc">10m walk or stretch.</div>
+                    </div>
+                    <div class="check-circle"></div>
+                </label>
             </div>
         </div>
-        <div class="task-list">
-            <input type="checkbox" id="t4" class="task-checkbox" onchange="updateProgress()">
-            <label for="t4" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-bowl-food task-icon"></i>High Protein Lunch</div>
-                    <div class="task-desc">Fuel focus.</div>
-                </div>
-                <div class="check-circle"></div>
-            </label>
 
-            <input type="checkbox" id="t5" class="task-checkbox" onchange="updateProgress()">
-            <label for="t5" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-arrows-rotate task-icon"></i>Reset Break</div>
-                    <div class="task-desc">Step away from screens.</div>
+        <!-- AFTERNOON BLOCK -->
+        <div class="time-block" id="block-afternoon">
+            <div class="block-header header-evening">
+                <span><i class="fa-regular fa-clock"></i> Afternoon</span>
+                <div class="master-check-label" onclick="toggleBlock('afternoon')">
+                    <i class="fa-solid fa-check-double"></i> Check All
                 </div>
-                <div class="check-circle"></div>
-            </label>
-        </div>
-    </div>
+            </div>
+            <div class="task-list">
+                <input type="checkbox" id="t4" class="task-checkbox" onchange="updateProgress()">
+                <label for="t4" class="task-card">
+                    <div class="task-content">
+                        <div class="task-title"><i class="fa-solid fa-bowl-food task-icon"></i>High Protein Lunch</div>
+                        <div class="task-desc">Fuel focus.</div>
+                    </div>
+                    <div class="check-circle"></div>
+                </label>
 
-    <!-- EVENING BLOCK -->
-    <div class="time-block" id="block-evening">
-        <div class="block-header header-afternoon">
-            <span><i class="fa-regular fa-moon"></i> Evening</span>
-            <div class="master-check-label" onclick="toggleBlock('evening')">
-                <i class="fa-solid fa-check-double"></i> Check All
+                <input type="checkbox" id="t5" class="task-checkbox" onchange="updateProgress()">
+                <label for="t5" class="task-card">
+                    <div class="task-content">
+                        <div class="task-title"><i class="fa-solid fa-arrows-rotate task-icon"></i>Reset Break</div>
+                        <div class="task-desc">Step away from screens.</div>
+                    </div>
+                    <div class="check-circle"></div>
+                </label>
             </div>
         </div>
-        <div class="task-list">
-            <input type="checkbox" id="t6" class="task-checkbox" onchange="updateProgress()">
-            <label for="t6" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-carrot task-icon"></i>Clean Dinner</div>
-                    <div class="task-desc">No sugar / No dairy.</div>
-                </div>
-                <div class="check-circle"></div>
-            </label>
 
-            <input type="checkbox" id="t7" class="task-checkbox" onchange="updateProgress()">
-            <label for="t7" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-book task-icon"></i>Wind Down</div>
-                    <div class="task-desc">Analog mode. No phones.</div>
+        <!-- EVENING BLOCK -->
+        <div class="time-block" id="block-evening">
+            <div class="block-header header-afternoon">
+                <span><i class="fa-regular fa-moon"></i> Evening</span>
+                <div class="master-check-label" onclick="toggleBlock('evening')">
+                    <i class="fa-solid fa-check-double"></i> Check All
                 </div>
-                <div class="check-circle"></div>
-            </label>
-        </div>
-    </div>
+            </div>
+            <div class="task-list">
+                <input type="checkbox" id="t6" class="task-checkbox" onchange="updateProgress()">
+                <label for="t6" class="task-card">
+                    <div class="task-content">
+                        <div class="task-title"><i class="fa-solid fa-carrot task-icon"></i>Clean Dinner</div>
+                        <div class="task-desc">No sugar / No dairy.</div>
+                    </div>
+                    <div class="check-circle"></div>
+                </label>
 
-    <!-- NIGHT BLOCK -->
-    <div class="time-block" id="block-night">
-        <div class="block-header header-night">
-            <span><i class="fa-solid fa-bed"></i> Night</span>
-            <div class="master-check-label" onclick="toggleBlock('night')">
-                <i class="fa-solid fa-check-double"></i> Check All
+                <input type="checkbox" id="t7" class="task-checkbox" onchange="updateProgress()">
+                <label for="t7" class="task-card">
+                    <div class="task-content">
+                        <div class="task-title"><i class="fa-solid fa-book task-icon"></i>Wind Down</div>
+                        <div class="task-desc">Analog mode. No phones.</div>
+                    </div>
+                    <div class="check-circle"></div>
+                </label>
             </div>
         </div>
-        <div class="task-list">
-            <input type="checkbox" id="t8" class="task-checkbox" onchange="updateProgress()">
-            <label for="t8" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-tablets task-icon"></i>Magnesium</div>
-                    <div class="task-desc">Deep sleep protocol.</div>
-                </div>
-                <div class="check-circle"></div>
-            </label>
 
-            <input type="checkbox" id="t9" class="task-checkbox" onchange="updateProgress()">
-            <label for="t9" class="task-card">
-                <div class="task-content">
-                    <div class="task-title"><i class="fa-solid fa-moon task-icon"></i>Sleep</div>
-                    <div class="task-desc">7-8 hours non-negotiable.</div>
+        <!-- NIGHT BLOCK -->
+        <div class="time-block" id="block-night">
+            <div class="block-header header-night">
+                <span><i class="fa-solid fa-bed"></i> Night</span>
+                <div class="master-check-label" onclick="toggleBlock('night')">
+                    <i class="fa-solid fa-check-double"></i> Check All
                 </div>
-                <div class="check-circle"></div>
-            </label>
+            </div>
+            <div class="task-list">
+                <input type="checkbox" id="t8" class="task-checkbox" onchange="updateProgress()">
+                <label for="t8" class="task-card">
+                    <div class="task-content">
+                        <div class="task-title"><i class="fa-solid fa-tablets task-icon"></i>Magnesium</div>
+                        <div class="task-desc">Deep sleep protocol.</div>
+                    </div>
+                    <div class="check-circle"></div>
+                </label>
+
+                <input type="checkbox" id="t9" class="task-checkbox" onchange="updateProgress()">
+                <label for="t9" class="task-card">
+                    <div class="task-content">
+                        <div class="task-title"><i class="fa-solid fa-moon task-icon"></i>Sleep</div>
+                        <div class="task-desc">7-8 hours non-negotiable.</div>
+                    </div>
+                    <div class="check-circle"></div>
+                </label>
+            </div>
         </div>
+
+        <!-- ADAPTIVE GUIDANCE CARD -->
+        <div class="guide-card" style="border-color: #10b981; margin-top: 20px; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
+            <div class="guide-title"><i class="fa-solid fa-brain" style="color:#10b981;"></i> Today's Adaptive Guidance</div>
+            <div class="guide-content">
+                <div id="adaptive-message" style="font-size: 0.95rem; line-height: 1.6; color: #166534;">
+                    <p id="adaptive-text">Complete tasks to see personalized guidance for tomorrow.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEEKLY PROGRESSION SYSTEM -->
+        <div class="guide-card" style="border-color: #8b5cf6; margin-top: 20px;">
+            <div class="guide-title"><i class="fa-solid fa-calendar-week" style="color:#8b5cf6;"></i> This Week's Focus</div>
+            <div class="guide-content">
+                <div id="weekly-focus-container" style="display: grid; gap: 15px; margin-top: 15px;">
+                    <div class="weekly-focus-item" style="border-left: 4px solid #3b82f6;">
+                        <div style="font-weight: 700; color: #1e40af; margin-bottom: 5px;">💪 Strength Focus</div>
+                        <div id="weekly-strength" style="font-size: 0.9rem; color: #475569;">Calculating...</div>
+                    </div>
+                    <div class="weekly-focus-item" style="border-left: 4px solid #f59e0b;">
+                        <div style="font-weight: 700; color: #92400e; margin-bottom: 5px;">🍲 Nutrition Focus</div>
+                        <div id="weekly-nutrition" style="font-size: 0.9rem; color: #475569;">Calculating...</div>
+                    </div>
+                    <div class="weekly-focus-item" style="border-left: 4px solid #10b981;">
+                        <div style="font-weight: 700; color: #166534; margin-bottom: 5px;">🛌 Recovery Focus</div>
+                        <div id="weekly-recovery" style="font-size: 0.9rem; color: #475569;">Calculating...</div>
+                    </div>
+                    <div class="weekly-focus-item" style="border-left: 4px solid #06b6d4;">
+                        <div style="font-weight: 700; color: #0e7490; margin-bottom: 5px;">🫁 Mobility & Breath</div>
+                        <div id="weekly-mobility" style="font-size: 0.9rem; color: #475569;">Calculating...</div>
+                    </div>
+                </div>
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0; font-size: 0.8rem; color: #64748b; text-align: center;">
+                    Week <span id="current-week">1</span> of 9 • Updates automatically based on last week's performance
+                </div>
+            </div>
+        </div>
+
+        <!-- JOURNEY SECTION (Only in Daily Tab) -->
+        <section class="journey-section">
+            <div class="journey-header">
+                <div class="journey-title">Consistency Tracker</div>
+                <div class="journey-subtitle" id="journey-stats">Completed: 0 / 60 days</div>
+            </div>
+            <div class="journey-grid" id="journey-grid">
+                <!-- Grid generated by JS -->
+            </div>
+        </section>
     </div>
 
-    <!-- JOURNEY SECTION -->
-    <section class="journey-section">
-        <div class="journey-header">
-            <div class="journey-title">Your nervous system is learning consistency.</div>
-            <div class="journey-subtitle" id="journey-stats">Completed: 0 / 60 days</div>
+    <!-- TAB 2: THE SYSTEM (Educational & Accountability) -->
+    <div id="view-system" class="tab-content" style="display: none;">
+        
+        <!-- INTRO -->
+        <div style="margin-bottom: 20px; text-align: center; color: #64748b;">
+            <p style="font-size: 0.9rem;">The guidebook for your gut health & safety.</p>
         </div>
-        <div class="journey-grid" id="journey-grid">
-            <!-- Grid generated by JS -->
+
+        <!-- CARD 1: DIET STRATEGY -->
+        <div class="guide-card diet">
+            <div class="guide-title"><i class="fa-solid fa-bowl-rice" style="color:#f59e0b;"></i> The "Warm & Wet" Rule</div>
+            <div class="guide-content">
+                <p>To heal bloating/constipation, your gut needs pre-digested food (cooked) and moisture.</p>
+                <div class="rule-box">
+                    <ul class="rule-list">
+                        <li><i class="fa-solid fa-check good"></i> <strong>Do Eat:</strong> Soups, Stews, Khichdi, Soft Rice, Cooked Carrots/Zucchini.</li>
+                        <li><i class="fa-solid fa-xmark bad"></i> <strong>Avoid:</strong> Raw Salads, Cold Milk, Dry Bread, Broccoli/Cabbage (for now).</li>
+                    </ul>
+                </div>
+                <p style="font-size:0.8rem; margin-top:10px;"><strong>Accountability:</strong> How many meals were warm/cooked today?</p>
+                <div class="counter-ui">
+                    <span class="counter-label">Warm Meals Logged:</span>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <button class="btn-count" onclick="updateCount('diet', -1)"><i class="fa-solid fa-minus"></i></button>
+                        <span id="count-diet" class="count-display">0</span>
+                        <button class="btn-count" onclick="updateCount('diet', 1)"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+
+        <!-- CARD 1.5: FOOD NAVIGATOR -->
+        <div class="guide-card" style="border-color: #10b981;">
+            <div class="guide-title"><i class="fa-solid fa-compass" style="color:#10b981;"></i> Food Navigator — What To Eat Today</div>
+            <div class="guide-content">
+                <p style="font-size:0.85rem; color:#64748b; margin-bottom:15px;">Your daily food compass. No thinking required.</p>
+                
+                <!-- Daily Eating Template -->
+                <div class="rule-box" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-color: #10b981; margin-bottom: 20px;">
+                    <div style="font-weight: 800; color: #166534; margin-bottom: 10px; font-size: 1rem;">📋 Daily Eating Template</div>
+                    <div style="font-size: 0.95rem; color: #475569; line-height: 1.8;">
+                        <strong>Each meal =</strong><br>
+                        <span style="color: #3b82f6;">Protein</span> + <span style="color: #f59e0b;">Gentle Carb</span> + <span style="color: #10b981;">Cooked Veg</span> + <span style="color: #8b5cf6;">Healthy Fat</span>
+                    </div>
+                </div>
+
+                <!-- Dynamic Symptom-Based Guidance -->
+                <div id="food-navigator-guidance" style="margin-bottom: 20px; padding: 15px; background: #fef3c7; border-radius: 12px; border-left: 4px solid #fbbf24;">
+                    <div style="font-weight: 700; color: #92400e; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-lightbulb"></i> Today's Eating Mode
+                    </div>
+                    <div id="food-mode-text" style="font-size: 0.9rem; color: #78350f; line-height: 1.6;">
+                        Log a symptom to see personalized food guidance.
+                    </div>
+                </div>
+
+                <!-- Core Carb List -->
+                <div style="margin-bottom: 20px;">
+                    <div style="font-weight: 800; color: #334155; margin-bottom: 10px; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-wheat-awn" style="color: #f59e0b;"></i> Core Carbs (Primary Staples)
+                    </div>
+                    <div class="rule-box" style="background: #fff7ed; border-color: #fed7aa;">
+                        <ul class="rule-list" style="margin: 0;">
+                            <li><i class="fa-solid fa-check good"></i> <strong>Millets:</strong> Ragi, Foxtail, Jowar, Little Millet</li>
+                            <li><i class="fa-solid fa-check good"></i> <strong>Quinoa</strong></li>
+                            <li><i class="fa-solid fa-check good"></i> <strong>Buckwheat</strong></li>
+                            <li><i class="fa-solid fa-check good"></i> <strong>Amaranth</strong></li>
+                            <li><i class="fa-solid fa-check good"></i> <strong>White Rice</strong> (small portions during gut healing)</li>
+                        </ul>
+                    </div>
+                    <div style="margin-top: 10px; padding: 10px; background: #fef2f2; border-radius: 8px; border-left: 3px solid #fca5a5;">
+                        <div style="font-weight: 700; color: #991b1b; font-size: 0.85rem; margin-bottom: 5px;">❌ Avoid:</div>
+                        <div style="font-size: 0.8rem; color: #7f1d1d;">Wheat bread / pasta / refined flour • Sugar • Dairy • Cold foods • Fried foods</div>
+                    </div>
+                </div>
+
+                <!-- Protein Guide -->
+                <div style="margin-bottom: 20px;">
+                    <div style="font-weight: 800; color: #334155; margin-bottom: 10px; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-drumstick-bite" style="color: #3b82f6;"></i> Protein Guide
+                    </div>
+                    <div class="rule-box" style="background: #eff6ff; border-color: #dbeafe;">
+                        <ul class="rule-list" style="margin: 0;">
+                            <li><i class="fa-solid fa-check good"></i> <strong>Best:</strong> Eggs, Chicken, Fish, Tofu/Tempeh, Lean Beef (occasionally)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Gut-Safe Veggies -->
+                <div style="margin-bottom: 20px;">
+                    <div style="font-weight: 800; color: #334155; margin-bottom: 10px; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-carrot" style="color: #10b981;"></i> Veggies (Gut-Safe List)
+                    </div>
+                    <div class="rule-box" style="background: #f0fdf4; border-color: #86efac; margin-bottom: 10px;">
+                        <div style="font-weight: 700; color: #166534; margin-bottom: 8px; font-size: 0.85rem;">✅ Eat (cooked):</div>
+                        <div style="font-size: 0.85rem; color: #475569;">Carrot • Zucchini • Spinach • Bottle Gourd • Pumpkin • Green Beans</div>
+                    </div>
+                    <div style="padding: 10px; background: #fef2f2; border-radius: 8px; border-left: 3px solid #fca5a5;">
+                        <div style="font-weight: 700; color: #991b1b; font-size: 0.85rem; margin-bottom: 5px;">❌ Avoid for now:</div>
+                        <div style="font-size: 0.8rem; color: #7f1d1d;">Cabbage • Cauliflower • Broccoli • Raw Onion • Cold Salads</div>
+                    </div>
+                </div>
+
+                <!-- Fruit & Extras -->
+                <div style="margin-bottom: 15px;">
+                    <div style="font-weight: 800; color: #334155; margin-bottom: 10px; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-apple-whole" style="color: #f59e0b;"></i> Fruit & Extras
+                    </div>
+                    <div class="rule-box" style="background: #fff7ed; border-color: #fed7aa; margin-bottom: 10px;">
+                        <div style="font-weight: 700; color: #92400e; margin-bottom: 8px; font-size: 0.85rem;">✅ Safe:</div>
+                        <div style="font-size: 0.85rem; color: #475569;">Papaya • Blueberries • Pomegranate • Kiwi • Stewed Apples</div>
+                    </div>
+                    <div style="padding: 10px; background: #fef2f2; border-radius: 8px; border-left: 3px solid #fca5a5;">
+                        <div style="font-weight: 700; color: #991b1b; font-size: 0.85rem; margin-bottom: 5px;">❌ Avoid:</div>
+                        <div style="font-size: 0.8rem; color: #7f1d1d;">Very acidic fruit on empty stomach • Fruit + heavy meals</div>
+                    </div>
+                </div>
+
+                <!-- Quick Reference Table -->
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #e2e8f0;">
+                    <div style="font-weight: 800; color: #334155; margin-bottom: 12px; font-size: 0.95rem;">📊 Symptom → Food Decision Map</div>
+                    <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 10px;">This updates automatically based on your logged symptoms:</div>
+                    <div id="food-decision-table" style="font-size: 0.85rem;">
+                        <!-- Dynamically generated based on symptoms -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 2: MOVEMENT STRATEGY -->
+        <div class="guide-card move">
+            <div class="guide-title"><i class="fa-solid fa-lungs" style="color:#3b82f6;"></i> Safe Strength</div>
+            <div class="guide-content">
+                <p><strong>Golden Rule:</strong> If you gasp for air, slow down. Nose breathing only.</p>
+                
+                <div class="rule-box" style="background: #eff6ff; border-color: #dbeafe;">
+                    <strong>1. Wall Push-Ups</strong>
+                    <br><span style="font-size:0.8rem">Targets underarm area. Keep core tight.</span>
+                </div>
+                <div class="counter-ui">
+                    <span class="counter-label">Sets Completed:</span>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <button class="btn-count" onclick="updateCount('push', -1)"><i class="fa-solid fa-minus"></i></button>
+                        <span id="count-push" class="count-display">0</span>
+                        <button class="btn-count" onclick="updateCount('push', 1)"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="rule-box" style="margin-top:15px; background: #eff6ff; border-color: #dbeafe;">
+                    <strong>2. Sit-to-Stand</strong>
+                    <br><span style="font-size:0.8rem">Targets legs & blood flow. Go slow.</span>
+                </div>
+                <div class="counter-ui">
+                    <span class="counter-label">Sets Completed:</span>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <button class="btn-count" onclick="updateCount('squat', -1)"><i class="fa-solid fa-minus"></i></button>
+                        <span id="count-squat" class="count-display">0</span>
+                        <button class="btn-count" onclick="updateCount('squat', 1)"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 3: SYMPTOM DECODER -->
+        <div class="guide-card alert">
+            <div class="guide-title"><i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> Symptom Decoder</div>
+            <div class="guide-content">
+                <ul class="rule-list">
+                    <li><strong>Bloating?</strong> Sip warm ginger water. Sit upright (don't lie down).</li>
+                    <li><strong>Short Breath?</strong> Stop. Sit down. Box breathe (In 4, Hold 4, Out 4).</li>
+                    <li><strong>Blood?</strong> Note the color. If dark/tarry, seek help immediately.</li>
+                </ul>
+                
+                <div style="margin-top:15px; padding-top:15px; border-top:1px solid #eee;">
+                    <strong style="font-size:0.9rem; color:#334155;">Symptom Intelligence Log:</strong>
+                    <p style="font-size:0.8rem; color:#64748b; margin:8px 0;">Log your current state. This influences tomorrow's guidance.</p>
+                    <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:8px; margin-top:10px;">
+                        <button class="symptom-btn" data-symptom="Calm" style="border-color: #86efac; background:#f0fdf4; color:#166534;" onclick="logSymptom('Calm')">😊 Calm</button>
+                        <button class="symptom-btn" data-symptom="Bloated" style="border-color: #fca5a5; background:#fef2f2; color:#991b1b;" onclick="logSymptom('Bloated')">🎈 Bloated</button>
+                        <button class="symptom-btn" data-symptom="Reflux" style="border-color: #fbbf24; background:#fef3c7; color:#92400e;" onclick="logSymptom('Reflux')">🔥 Reflux</button>
+                        <button class="symptom-btn" data-symptom="Constipated" style="border-color: #f97316; background:#fff7ed; color:#9a3412;" onclick="logSymptom('Constipated')">🚫 Constipated</button>
+                        <button class="symptom-btn" data-symptom="Breath Limited" style="border-color: #3b82f6; background:#eff6ff; color:#1e40af;" onclick="logSymptom('Breath Limited')">🫁 Breath Limited</button>
+                        <button class="symptom-btn" data-symptom="High Stress" style="border-color: #8b5cf6; background:#f5f3ff; color:#6b21a8;" onclick="logSymptom('High Stress')">⚡ High Stress</button>
+                    </div>
+                    <div id="symptom-actions" style="margin-top: 15px; padding: 12px; background: #f8fafc; border-radius: 10px; display: none;">
+                        <strong style="font-size:0.85rem; color:#334155; display:block; margin-bottom:8px;">Immediate Actions:</strong>
+                        <div id="symptom-immediate" style="font-size:0.8rem; color:#475569; line-height:1.6;"></div>
+                    </div>
+                    <div id="last-log" style="font-size: 0.75rem; color: #94a3b8; text-align: center; margin-top: 8px; font-style: italic;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Space for footer -->
+        <div style="height: 50px;"></div>
+    </div>
+
+    <!-- TAB 3: TRANSFORMATION METRICS DASHBOARD -->
+    <div id="view-metrics" class="tab-content" style="display: none;">
+        <div style="margin-bottom: 20px; text-align: center; color: #64748b;">
+            <p style="font-size: 0.9rem;">Track your transformation journey with visual progress.</p>
+        </div>
+
+        <!-- WEIGHT TRACKING -->
+        <div class="guide-card" style="border-color: #3b82f6;">
+            <div class="guide-title"><i class="fa-solid fa-weight-scale" style="color:#3b82f6;"></i> Weight & Body Measurements</div>
+            <div class="guide-content">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                    <div>
+                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; color: #475569;">Weight (lbs)</label>
+                        <input type="number" id="input-weight" placeholder="Enter weight" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; color: #475569;">Waist (inches)</label>
+                        <input type="number" id="input-waist" placeholder="Enter waist" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; color: #475569;">Hip (inches)</label>
+                    <input type="number" id="input-hip" placeholder="Enter hip measurement" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem;">
+                </div>
+                <button onclick="logMeasurement()" style="width: 100%; padding: 12px; background: #3b82f6; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">Log Measurement</button>
+                
+                <!-- Weight Chart -->
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                    <div style="font-weight: 700; margin-bottom: 10px; color: #334155;">Weight Trend</div>
+                    <div id="weight-chart" style="height: 150px; background: #f8fafc; border-radius: 10px; display: flex; align-items: flex-end; justify-content: space-around; padding: 10px;">
+                        <!-- Chart bars generated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STRENGTH TRACKING -->
+        <div class="guide-card" style="border-color: #10b981;">
+            <div class="guide-title"><i class="fa-solid fa-dumbbell" style="color:#10b981;"></i> Strength Progress</div>
+            <div class="guide-content">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                    <div>
+                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; color: #475569;">Push-ups (sets)</label>
+                        <input type="number" id="input-pushups" placeholder="Sets completed" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; color: #475569;">Squats (sets)</label>
+                        <input type="number" id="input-squats" placeholder="Sets completed" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; color: #475569;">Walk Time (minutes)</label>
+                    <input type="number" id="input-walk" placeholder="Minutes walked" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem;">
+                </div>
+                <button onclick="logStrength()" style="width: 100%; padding: 12px; background: #10b981; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">Log Strength</button>
+                
+                <!-- Strength Chart -->
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                    <div style="font-weight: 700; margin-bottom: 10px; color: #334155;">Strength Trend (Total Sets)</div>
+                    <div id="strength-chart" style="height: 150px; background: #f8fafc; border-radius: 10px; display: flex; align-items: flex-end; justify-content: space-around; padding: 10px;">
+                        <!-- Chart bars generated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SYMPTOM & BREATH TRENDS -->
+        <div class="guide-card" style="border-color: #f59e0b;">
+            <div class="guide-title"><i class="fa-solid fa-heart-pulse" style="color:#f59e0b;"></i> Symptom & Breath Trends</div>
+            <div class="guide-content">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; color: #475569;">Breath Tolerance (1-10)</label>
+                    <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 8px;">Rate how well you can breathe during light activity (1=very limited, 10=normal)</p>
+                    <input type="range" id="input-breath" min="1" max="10" value="5" style="width: 100%;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #94a3b8; margin-top: 5px;">
+                        <span>Limited</span>
+                        <span id="breath-value">5</span>
+                        <span>Normal</span>
+                    </div>
+                </div>
+                <button onclick="logBreathTolerance()" style="width: 100%; padding: 12px; background: #f59e0b; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">Log Breath Tolerance</button>
+                
+                <!-- Symptom Trend Chart -->
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                    <div style="font-weight: 700; margin-bottom: 10px; color: #334155;">Gut Symptom Frequency (Last 7 Days)</div>
+                    <div id="symptom-chart" style="height: 150px; background: #f8fafc; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; justify-content: space-around;">
+                        <!-- Chart generated by JS -->
+                    </div>
+                </div>
+                
+                <!-- Breath Trend Chart -->
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                    <div style="font-weight: 700; margin-bottom: 10px; color: #334155;">Breath Tolerance Trend</div>
+                    <div id="breath-chart" style="height: 150px; background: #f8fafc; border-radius: 10px; display: flex; align-items: flex-end; justify-content: space-around; padding: 10px;">
+                        <!-- Chart bars generated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Space for footer -->
+        <div style="height: 50px;"></div>
+    </div>
 
     <!-- CELEBRATION OVERLAY -->
     <div id="celebration-overlay">
@@ -576,7 +1170,7 @@
 
 </div>
 
-<!-- Minimal Interaction Script -->
+<!-- Logic Script -->
 <script>
     // 1. Initialize State
     let streak = parseInt(localStorage.getItem('resetStreak')) || 0;
@@ -592,8 +1186,731 @@
     const STORAGE_KEYS = {
         CHECKBOXES: 'resetPlanCheckboxes',
         PROGRESS: 'resetPlanProgress',
-        LAST_DATE: 'resetPlanLastDate'
+        LAST_DATE: 'resetPlanLastDate',
+        SYSTEM_COUNTS: 'resetSystemCounts',
+        LAST_SYMPTOM: 'resetLastSymptom',
+        VISION: 'resetVision',
+        RULES: 'resetRules',
+        SYMPTOM_HISTORY: 'resetSymptomHistory',
+        DAILY_DATA: 'resetDailyData',
+        MEASUREMENTS: 'resetMeasurements',
+        STRENGTH_LOG: 'resetStrengthLog',
+        BREATH_LOG: 'resetBreathLog'
     };
+
+    // Symptom Intelligence Database (Enhanced with Food Guidance)
+    const SYMPTOM_INTELLIGENCE = {
+        'Calm': {
+            immediate: ['Continue current routine', 'Maintain hydration', 'Gentle movement encouraged'],
+            nextDay: 'Build',
+            food: 'Continue warm, cooked foods',
+            training: 'Can increase strength targets slightly',
+            foodMode: 'Normal Clean Meals',
+            foodDetails: 'You can follow your standard meal template. Include protein, gentle carbs (millets/quinoa), cooked veggies, and healthy fats. Maintain variety while staying within your rules.'
+        },
+        'Bloated': {
+            immediate: ['Sip warm ginger water', 'Sit upright (don\'t lie down)', 'Avoid cold foods', 'Gentle abdominal massage'],
+            nextDay: 'Recovery',
+            food: 'Stick to soups, khichdi, soft rice only',
+            training: 'Light walking only, no strength work',
+            foodMode: 'Gut Healing Mode',
+            foodDetails: 'Soups, khichdi, soft white rice, warm ginger water. Avoid all raw foods, cold items, and heavy proteins. Small portions, eat slowly. Focus on maximum digestibility.'
+        },
+        'Reflux': {
+            immediate: ['Sit upright for 2 hours after eating', 'Avoid lying down', 'Sip warm water slowly', 'Consider smaller meals'],
+            nextDay: 'Recovery',
+            food: 'Smaller, more frequent meals. No acidic foods.',
+            training: 'Rest day or very light walking only',
+            foodMode: 'Acid-Safe Mode',
+            foodDetails: 'Small portions, 5-6 meals instead of 3. No acidic foods (tomatoes, citrus, vinegar). Stick to neutral foods: soft rice, steamed veggies, gentle proteins. Sit upright after eating.'
+        },
+        'Constipated': {
+            immediate: ['Increase warm water intake', 'Gentle walking', 'Warm prune juice if tolerated', 'Avoid dry foods'],
+            nextDay: 'Recovery',
+            food: 'Extra moisture in meals, soups, stews',
+            training: 'Light movement to stimulate digestion',
+            foodMode: 'Hydration Focus',
+            foodDetails: 'Extra liquids in every meal. Soups, stews, khichdi with extra water. Warm prune juice if tolerated. Avoid dry foods (bread, crackers). Include gentle fiber: cooked carrots, zucchini.'
+        },
+        'Breath Limited': {
+            immediate: ['Stop all activity', 'Sit down', 'Box breathe: In 4, Hold 4, Out 4', 'Rest until stable'],
+            nextDay: 'Stabilize',
+            food: 'Small meals, avoid heavy foods',
+            training: 'Recovery cardio only (very light walking)',
+            foodMode: 'Light Meals Only',
+            foodDetails: 'Very small portions. Light proteins (eggs, small fish). Avoid heavy meals that require extra oxygen for digestion. Soups and broths preferred. Eat slowly, chew thoroughly.'
+        },
+        'High Stress': {
+            immediate: ['Box breathing exercise', 'Step away from screens', 'Gentle stretching', 'Warm tea'],
+            nextDay: 'Stabilize',
+            food: 'Comfort foods that are warm and easy to digest',
+            training: 'Gentle movement only, prioritize rest',
+            foodMode: 'Nervous System Support',
+            foodDetails: 'Warm, comforting, easy-to-digest meals. Khichdi, soups, soft rice with gentle proteins. Avoid stimulating foods (caffeine, spicy). Focus on foods that calm the nervous system.'
+        }
+    };
+
+    // --- SYSTEM TAB COUNTERS ---
+    let systemCounts = {
+        diet: 0,
+        push: 0,
+        squat: 0
+    };
+
+    function updateCount(type, change) {
+        systemCounts[type] += change;
+        if(systemCounts[type] < 0) systemCounts[type] = 0; // No negatives
+        if(type === 'diet' && systemCounts[type] > 3) systemCounts[type] = 3; // Max 3 meals
+        
+        // Update UI
+        document.getElementById('count-' + type).innerText = systemCounts[type];
+        
+        // Save
+        localStorage.setItem(STORAGE_KEYS.SYSTEM_COUNTS, JSON.stringify(systemCounts));
+    }
+
+    function loadCounts() {
+        const saved = localStorage.getItem(STORAGE_KEYS.SYSTEM_COUNTS);
+        if(saved) {
+            systemCounts = JSON.parse(saved);
+            document.getElementById('count-diet').innerText = systemCounts.diet || 0;
+            document.getElementById('count-push').innerText = systemCounts.push || 0;
+            document.getElementById('count-squat').innerText = systemCounts.squat || 0;
+        }
+        
+        // Load Symptom Log
+        const lastLog = localStorage.getItem(STORAGE_KEYS.LAST_SYMPTOM);
+        if(lastLog) {
+            document.getElementById('last-log').innerText = "Last logged: " + lastLog;
+        }
+    }
+
+    function logSymptom(status) {
+        const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        const date = new Date().toDateString();
+        const msg = `${status} at ${time}`;
+        
+        // Save to history
+        let history = JSON.parse(localStorage.getItem(STORAGE_KEYS.SYMPTOM_HISTORY) || '[]');
+        // Remove existing entry for today if any
+        history = history.filter(s => s.date !== date);
+        history.push({ date, symptom: status, time });
+        localStorage.setItem(STORAGE_KEYS.SYMPTOM_HISTORY, JSON.stringify(history));
+        
+        localStorage.setItem(STORAGE_KEYS.LAST_SYMPTOM, msg);
+        document.getElementById('last-log').innerText = "Last logged: " + msg;
+        
+        // Show immediate actions
+        const symptomData = SYMPTOM_INTELLIGENCE[status];
+        if (symptomData) {
+            const actionsDiv = document.getElementById('symptom-actions');
+            const immediateDiv = document.getElementById('symptom-immediate');
+            if (actionsDiv && immediateDiv) {
+                immediateDiv.innerHTML = symptomData.immediate.map(a => `• ${a}`).join('<br>');
+                actionsDiv.style.display = 'block';
+            }
+        }
+        
+        // Update active button state
+        document.querySelectorAll('.symptom-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.symptom === status) {
+                btn.classList.add('active');
+            }
+        });
+        
+        // Update adaptive guidance
+        updateAdaptiveGuidance();
+        
+        // Update Food Navigator
+        updateFoodNavigator();
+        
+        // Visual feedback
+        const feedback = document.createElement('div');
+        feedback.textContent = `✓ Logged: ${status}`;
+        feedback.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 12px 24px; border-radius: 10px; z-index: 2000; font-weight: 700; box-shadow: 0 4px 15px rgba(0,0,0,0.2);';
+        document.body.appendChild(feedback);
+        setTimeout(() => feedback.remove(), 2000);
+    }
+
+    // --- NORTH STAR MODULE ---
+    function loadVision() {
+        const saved = localStorage.getItem(STORAGE_KEYS.VISION);
+        if (saved) {
+            const vision = JSON.parse(saved);
+            document.getElementById('vision-60day').value = vision.day60 || '';
+            document.getElementById('vision-12month').value = vision.month12 || '';
+            document.getElementById('vision-why').value = vision.why || '';
+            document.getElementById('vision-success').value = vision.success || '';
+        }
+        
+        // Auto-save on input
+        ['vision-60day', 'vision-12month', 'vision-why', 'vision-success'].forEach(id => {
+            document.getElementById(id).addEventListener('input', saveVision);
+        });
+    }
+
+    function saveVision() {
+        const vision = {
+            day60: document.getElementById('vision-60day').value,
+            month12: document.getElementById('vision-12month').value,
+            why: document.getElementById('vision-why').value,
+            success: document.getElementById('vision-success').value
+        };
+        localStorage.setItem(STORAGE_KEYS.VISION, JSON.stringify(vision));
+    }
+
+    function loadRules() {
+        const saved = localStorage.getItem(STORAGE_KEYS.RULES);
+        const rules = saved ? JSON.parse(saved) : [
+            'No dairy',
+            'No sugar',
+            'Warm cooked food only',
+            'Daily walking non-negotiable',
+            'No training if breath is unstable'
+        ];
+        renderRules(rules);
+        return rules;
+    }
+
+    function renderRules(rules) {
+        const container = document.getElementById('rules-list');
+        container.innerHTML = '';
+        rules.forEach((rule, index) => {
+            const div = document.createElement('div');
+            div.className = 'rule-item';
+            div.innerHTML = `
+                <span class="rule-item-text">${rule}</span>
+                <button class="rule-item-delete" onclick="deleteRule(${index})">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    function addRule() {
+        const input = document.getElementById('new-rule-input');
+        const rule = input.value.trim();
+        if (!rule) return;
+        
+        const saved = localStorage.getItem(STORAGE_KEYS.RULES);
+        const rules = saved ? JSON.parse(saved) : [];
+        rules.push(rule);
+        localStorage.setItem(STORAGE_KEYS.RULES, JSON.stringify(rules));
+        renderRules(rules);
+        input.value = '';
+    }
+
+    function deleteRule(index) {
+        const saved = localStorage.getItem(STORAGE_KEYS.RULES);
+        const rules = saved ? JSON.parse(saved) : [];
+        rules.splice(index, 1);
+        localStorage.setItem(STORAGE_KEYS.RULES, JSON.stringify(rules));
+        renderRules(rules);
+    }
+
+    // --- ADAPTIVE DAILY ENGINE ---
+    function calculateTomorrowFocus() {
+        // Get today's data
+        const todayData = getTodayData();
+        const completion = todayData.completion;
+        const symptom = todayData.symptom;
+        const streak = parseInt(localStorage.getItem('resetStreak')) || 0;
+
+        // Decision logic
+        let focus = 'Stabilize';
+        let explanation = 'Focus on recovery and gentle movement.';
+
+        if (symptom) {
+            const symptomData = SYMPTOM_INTELLIGENCE[symptom];
+            if (symptomData) {
+                focus = symptomData.nextDay;
+                if (focus === 'Recovery') {
+                    explanation = 'Gut healing mode: Warm foods only, light movement, prioritize rest.';
+                } else if (focus === 'Stabilize') {
+                    explanation = 'Nervous system stabilization: Gentle activities, breathing exercises, small meals.';
+                }
+            }
+        } else if (completion >= 80 && symptom === null) {
+            focus = 'Build';
+            explanation = 'High completion + no symptoms: Can slightly increase strength targets tomorrow.';
+        } else if (completion >= 50 && streak >= 3) {
+            focus = 'Build';
+            explanation = 'Good consistency: Maintain current intensity, focus on form.';
+        } else if (completion < 30) {
+            focus = 'Recovery';
+            explanation = 'Low completion: Tomorrow is a reset day. Focus on basics only.';
+        }
+
+        return { focus, explanation };
+    }
+
+    function getTodayData() {
+        const checkboxes = document.querySelectorAll('.task-checkbox');
+        const checked = document.querySelectorAll('.task-checkbox:checked');
+        const completion = checkboxes.length > 0 ? Math.round((checked.length / checkboxes.length) * 100) : 0;
+        
+        const symptomHistory = JSON.parse(localStorage.getItem(STORAGE_KEYS.SYMPTOM_HISTORY) || '[]');
+        const today = new Date().toDateString();
+        const todaySymptom = symptomHistory.find(s => s.date === today);
+        
+        return {
+            completion,
+            symptom: todaySymptom ? todaySymptom.symptom : null
+        };
+    }
+
+    function updateAdaptiveGuidance() {
+        const { focus, explanation } = calculateTomorrowFocus();
+        const focusEl = document.getElementById('focus-mode');
+        const explanationEl = document.getElementById('focus-explanation');
+        
+        if (focusEl) {
+            focusEl.textContent = focus;
+            // Color code based on focus
+            const colors = {
+                'Recovery': '#ef4444',
+                'Build': '#10b981',
+                'Stabilize': '#3b82f6',
+                'Push': '#f59e0b'
+            };
+            focusEl.parentElement.style.borderColor = colors[focus] || '#3b82f6';
+        }
+        
+        if (explanationEl) {
+            explanationEl.textContent = explanation;
+        }
+
+        // Update adaptive message in daily view
+        const adaptiveText = document.getElementById('adaptive-text');
+        if (adaptiveText) {
+            const todayData = getTodayData();
+            let message = `Tomorrow's Focus: <strong>${focus}</strong><br>${explanation}`;
+            if (todayData.symptom) {
+                const symptomData = SYMPTOM_INTELLIGENCE[todayData.symptom];
+                if (symptomData) {
+                    message += `<br><br><strong>Food:</strong> ${symptomData.food}`;
+                    message += `<br><strong>Training:</strong> ${symptomData.training}`;
+                }
+            }
+            adaptiveText.innerHTML = message;
+        }
+    }
+
+    // --- TAB SWITCHING ---
+    function switchTab(tabName) {
+        // Hide all
+        document.getElementById('view-northstar').style.display = 'none';
+        document.getElementById('view-daily').style.display = 'none';
+        document.getElementById('view-system').style.display = 'none';
+        document.getElementById('view-metrics').style.display = 'none';
+        
+        // Deactivate buttons
+        document.getElementById('btn-northstar').classList.remove('active');
+        document.getElementById('btn-daily').classList.remove('active');
+        document.getElementById('btn-system').classList.remove('active');
+        document.getElementById('btn-metrics').classList.remove('active');
+
+        // Show target
+        document.getElementById('view-' + tabName).style.display = 'block';
+        document.getElementById('btn-' + tabName).classList.add('active');
+        
+        // Update adaptive guidance when switching to daily or northstar
+        if (tabName === 'daily' || tabName === 'northstar') {
+            updateAdaptiveGuidance();
+            updateWeeklyProgression();
+        }
+        
+        // Update Food Navigator when switching to system tab
+        if (tabName === 'system') {
+            updateFoodNavigator();
+        }
+        
+        // Update metrics charts when switching to metrics tab
+        if (tabName === 'metrics') {
+            renderMetricsCharts();
+        }
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- METRICS DASHBOARD ---
+    function logMeasurement() {
+        const weight = parseFloat(document.getElementById('input-weight').value);
+        const waist = parseFloat(document.getElementById('input-waist').value);
+        const hip = parseFloat(document.getElementById('input-hip').value);
+        
+        if (!weight && !waist && !hip) {
+            alert('Please enter at least one measurement');
+            return;
+        }
+
+        const measurements = JSON.parse(localStorage.getItem(STORAGE_KEYS.MEASUREMENTS) || '[]');
+        measurements.push({
+            date: new Date().toDateString(),
+            timestamp: Date.now(),
+            weight: weight || null,
+            waist: waist || null,
+            hip: hip || null
+        });
+        localStorage.setItem(STORAGE_KEYS.MEASUREMENTS, JSON.stringify(measurements));
+
+        // Clear inputs
+        document.getElementById('input-weight').value = '';
+        document.getElementById('input-waist').value = '';
+        document.getElementById('input-hip').value = '';
+
+        renderMetricsCharts();
+        showFeedback('✓ Measurement logged!');
+    }
+
+    function logStrength() {
+        const pushups = parseInt(document.getElementById('input-pushups').value) || 0;
+        const squats = parseInt(document.getElementById('input-squats').value) || 0;
+        const walk = parseInt(document.getElementById('input-walk').value) || 0;
+
+        if (pushups === 0 && squats === 0 && walk === 0) {
+            alert('Please enter at least one strength metric');
+            return;
+        }
+
+        const strengthLog = JSON.parse(localStorage.getItem(STORAGE_KEYS.STRENGTH_LOG) || '[]');
+        strengthLog.push({
+            date: new Date().toDateString(),
+            timestamp: Date.now(),
+            pushups,
+            squats,
+            walk,
+            total: pushups + squats
+        });
+        localStorage.setItem(STORAGE_KEYS.STRENGTH_LOG, JSON.stringify(strengthLog));
+
+        // Clear inputs
+        document.getElementById('input-pushups').value = '';
+        document.getElementById('input-squats').value = '';
+        document.getElementById('input-walk').value = '';
+
+        renderMetricsCharts();
+        showFeedback('✓ Strength logged!');
+    }
+
+    function logBreathTolerance() {
+        const breath = parseInt(document.getElementById('input-breath').value);
+        
+        const breathLog = JSON.parse(localStorage.getItem(STORAGE_KEYS.BREATH_LOG) || '[]');
+        breathLog.push({
+            date: new Date().toDateString(),
+            timestamp: Date.now(),
+            value: breath
+        });
+        localStorage.setItem(STORAGE_KEYS.BREATH_LOG, JSON.stringify(breathLog));
+
+        renderMetricsCharts();
+        showFeedback('✓ Breath tolerance logged!');
+    }
+
+    function renderMetricsCharts() {
+        renderWeightChart();
+        renderStrengthChart();
+        renderSymptomChart();
+        renderBreathChart();
+    }
+
+    function renderWeightChart() {
+        const measurements = JSON.parse(localStorage.getItem(STORAGE_KEYS.MEASUREMENTS) || '[]');
+        const container = document.getElementById('weight-chart');
+        if (!container) return;
+
+        if (measurements.length === 0) {
+            container.innerHTML = '<div style="width: 100%; text-align: center; color: #94a3b8; padding-top: 50px;">No data yet. Log your first measurement!</div>';
+            return;
+        }
+
+        // Get last 7 measurements with weight
+        const weightData = measurements.filter(m => m.weight !== null).slice(-7);
+        if (weightData.length === 0) {
+            container.innerHTML = '<div style="width: 100%; text-align: center; color: #94a3b8; padding-top: 50px;">No weight data yet.</div>';
+            return;
+        }
+
+        const maxWeight = Math.max(...weightData.map(m => m.weight));
+        const minWeight = Math.min(...weightData.map(m => m.weight));
+        const range = maxWeight - minWeight || 1;
+
+        container.innerHTML = '';
+        weightData.forEach((m, i) => {
+            const height = ((m.weight - minWeight) / range) * 100;
+            const bar = document.createElement('div');
+            bar.style.cssText = `width: ${100 / weightData.length}%; background: linear-gradient(to top, #3b82f6, #60a5fa); border-radius: 4px 4px 0 0; margin: 0 2px; position: relative; min-height: 20px;`;
+            bar.style.height = `${Math.max(height, 10)}%`;
+            bar.title = `${m.weight} lbs`;
+            container.appendChild(bar);
+        });
+    }
+
+    function renderStrengthChart() {
+        const strengthLog = JSON.parse(localStorage.getItem(STORAGE_KEYS.STRENGTH_LOG) || '[]');
+        const container = document.getElementById('strength-chart');
+        if (!container) return;
+
+        if (strengthLog.length === 0) {
+            container.innerHTML = '<div style="width: 100%; text-align: center; color: #94a3b8; padding-top: 50px;">No data yet. Log your first strength session!</div>';
+            return;
+        }
+
+        const last7 = strengthLog.slice(-7);
+        const maxTotal = Math.max(...last7.map(s => s.total), 1);
+
+        container.innerHTML = '';
+        last7.forEach((s, i) => {
+            const height = (s.total / maxTotal) * 100;
+            const bar = document.createElement('div');
+            bar.style.cssText = `width: ${100 / last7.length}%; background: linear-gradient(to top, #10b981, #34d399); border-radius: 4px 4px 0 0; margin: 0 2px; position: relative; min-height: 20px;`;
+            bar.style.height = `${Math.max(height, 10)}%`;
+            bar.title = `${s.total} total sets`;
+            container.appendChild(bar);
+        });
+    }
+
+    function renderSymptomChart() {
+        const symptomHistory = JSON.parse(localStorage.getItem(STORAGE_KEYS.SYMPTOM_HISTORY) || '[]');
+        const container = document.getElementById('symptom-chart');
+        if (!container) return;
+
+        // Get last 7 days
+        const last7Days = [];
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date();
+            date.setDate(date.getDate() - i);
+            last7Days.push(date.toDateString());
+        }
+
+        const symptomCounts = {
+            'Calm': 0,
+            'Bloated': 0,
+            'Reflux': 0,
+            'Constipated': 0,
+            'Breath Limited': 0,
+            'High Stress': 0
+        };
+
+        last7Days.forEach(day => {
+            const entry = symptomHistory.find(s => s.date === day);
+            if (entry && symptomCounts.hasOwnProperty(entry.symptom)) {
+                symptomCounts[entry.symptom]++;
+            }
+        });
+
+        const maxCount = Math.max(...Object.values(symptomCounts), 1);
+        const colors = {
+            'Calm': '#86efac',
+            'Bloated': '#fca5a5',
+            'Reflux': '#fbbf24',
+            'Constipated': '#fb923c',
+            'Breath Limited': '#60a5fa',
+            'High Stress': '#a78bfa'
+        };
+
+        container.innerHTML = '';
+        Object.entries(symptomCounts).forEach(([symptom, count]) => {
+            if (count === 0) return;
+            const bar = document.createElement('div');
+            bar.style.cssText = `display: flex; align-items: center; gap: 10px; margin-bottom: 8px;`;
+            bar.innerHTML = `
+                <span style="font-size: 0.75rem; font-weight: 700; min-width: 100px; color: #475569;">${symptom}</span>
+                <div style="flex: 1; height: 20px; background: #e2e8f0; border-radius: 10px; overflow: hidden; position: relative;">
+                    <div style="height: 100%; width: ${(count / maxCount) * 100}%; background: ${colors[symptom]}; border-radius: 10px; transition: width 0.3s;"></div>
+                </div>
+                <span style="font-size: 0.75rem; font-weight: 700; color: #64748b; min-width: 30px;">${count}</span>
+            `;
+            container.appendChild(bar);
+        });
+
+        if (container.innerHTML === '') {
+            container.innerHTML = '<div style="width: 100%; text-align: center; color: #94a3b8; padding-top: 50px;">No symptoms logged in last 7 days.</div>';
+        }
+    }
+
+    function renderBreathChart() {
+        const breathLog = JSON.parse(localStorage.getItem(STORAGE_KEYS.BREATH_LOG) || '[]');
+        const container = document.getElementById('breath-chart');
+        if (!container) return;
+
+        if (breathLog.length === 0) {
+            container.innerHTML = '<div style="width: 100%; text-align: center; color: #94a3b8; padding-top: 50px;">No data yet. Log your breath tolerance!</div>';
+            return;
+        }
+
+        const last7 = breathLog.slice(-7);
+        const maxValue = 10;
+
+        container.innerHTML = '';
+        last7.forEach((b, i) => {
+            const height = (b.value / maxValue) * 100;
+            const bar = document.createElement('div');
+            bar.style.cssText = `width: ${100 / last7.length}%; background: linear-gradient(to top, #f59e0b, #fbbf24); border-radius: 4px 4px 0 0; margin: 0 2px; position: relative; min-height: 20px;`;
+            bar.style.height = `${Math.max(height, 10)}%`;
+            bar.title = `${b.value}/10`;
+            container.appendChild(bar);
+        });
+    }
+
+    function showFeedback(message) {
+        const feedback = document.createElement('div');
+        feedback.textContent = message;
+        feedback.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #10b981; color: white; padding: 12px 24px; border-radius: 10px; z-index: 2000; font-weight: 700; box-shadow: 0 4px 15px rgba(0,0,0,0.2);';
+        document.body.appendChild(feedback);
+        setTimeout(() => feedback.remove(), 2000);
+    }
+
+    // --- FOOD NAVIGATOR UPDATE FUNCTION ---
+    function updateFoodNavigator() {
+        const symptomHistory = JSON.parse(localStorage.getItem(STORAGE_KEYS.SYMPTOM_HISTORY) || '[]');
+        const today = new Date().toDateString();
+        const todaySymptom = symptomHistory.find(s => s.date === today);
+        
+        const foodModeText = document.getElementById('food-mode-text');
+        const foodDecisionTable = document.getElementById('food-decision-table');
+        const foodGuidanceBox = document.getElementById('food-navigator-guidance');
+        
+        if (!foodModeText || !foodDecisionTable || !foodGuidanceBox) return;
+        
+        if (todaySymptom && SYMPTOM_INTELLIGENCE[todaySymptom.symptom]) {
+            const symptomData = SYMPTOM_INTELLIGENCE[todaySymptom.symptom];
+            
+            // Update the guidance box
+            foodModeText.innerHTML = `<strong style="color: #92400e;">${symptomData.foodMode}</strong><br><span style="font-size: 0.85rem; margin-top: 5px; display: block;">${symptomData.foodDetails}</span>`;
+            
+            // Update background color based on symptom
+            const colors = {
+                'Calm': { bg: '#f0fdf4', border: '#10b981' },
+                'Bloated': { bg: '#fef2f2', border: '#fca5a5' },
+                'Reflux': { bg: '#fef3c7', border: '#fbbf24' },
+                'Constipated': { bg: '#fff7ed', border: '#fb923c' },
+                'Breath Limited': { bg: '#eff6ff', border: '#60a5fa' },
+                'High Stress': { bg: '#f5f3ff', border: '#a78bfa' }
+            };
+            const color = colors[todaySymptom.symptom] || { bg: '#fef3c7', border: '#fbbf24' };
+            foodGuidanceBox.style.background = color.bg;
+            foodGuidanceBox.style.borderLeftColor = color.border;
+        } else {
+            foodModeText.innerHTML = 'Log a symptom above to see personalized food guidance for today.';
+            foodGuidanceBox.style.background = '#fef3c7';
+            foodGuidanceBox.style.borderLeftColor = '#fbbf24';
+        }
+        
+        // Update decision table
+        let tableHTML = '<div style="display: grid; gap: 8px;">';
+        Object.entries(SYMPTOM_INTELLIGENCE).forEach(([symptom, data]) => {
+            const isActive = todaySymptom && todaySymptom.symptom === symptom;
+            tableHTML += `
+                <div style="padding: 10px; background: ${isActive ? '#f0fdf4' : '#f8fafc'}; border-radius: 8px; border-left: 3px solid ${isActive ? '#10b981' : '#e2e8f0'};">
+                    <div style="font-weight: 700; color: #334155; font-size: 0.85rem; margin-bottom: 4px;">
+                        ${symptom} ${isActive ? '← Current' : ''}
+                    </div>
+                    <div style="font-size: 0.8rem; color: #475569;">
+                        ${data.foodMode}
+                    </div>
+                </div>
+            `;
+        });
+        tableHTML += '</div>';
+        foodDecisionTable.innerHTML = tableHTML;
+    }
+
+    // --- PROGRESS PSYCHOLOGY ENGINE ---
+    function getIdentityMessage(newStreak) {
+        const milestones = [
+            { days: 7, msg: "You're becoming someone who shows up daily." },
+            { days: 14, msg: "Two weeks strong. Your identity is shifting." },
+            { days: 21, msg: "Three weeks! This is who you are now." },
+            { days: 30, msg: "One month of transformation. You're doing it." },
+            { days: 45, msg: "45 days. You're not the same person who started." },
+            { days: 60, msg: "60 days complete. You've transformed." }
+        ];
+
+        for (let milestone of milestones) {
+            if (newStreak === milestone.days) {
+                return milestone.msg;
+            }
+        }
+        return null;
+    }
+
+    function triggerMicroCelebration(blockName) {
+        const messages = {
+            morning: "🌅 Morning routine complete! Starting strong.",
+            afternoon: "☀️ Afternoon check-in done. Staying on track.",
+            evening: "🌆 Evening routine complete. Winding down well.",
+            night: "🌙 Night routine done. Rest well, you earned it."
+        };
+
+        const msg = messages[blockName];
+        if (msg) {
+            showFeedback(msg);
+        }
+    }
+
+    function getWeeklyVictorySummary() {
+        const weekNum = getWeekNumber(currentDayIndex);
+        const weekData = getWeekData(weekNum);
+        const lastWeekData = weekNum > 1 ? getWeekData(weekNum - 1) : null;
+
+        if (weekData.completion.length === 0) {
+            return null;
+        }
+
+        const avgCompletion = weekData.avgCompletion;
+        let summary = `Week ${weekNum} Summary: `;
+        
+        if (avgCompletion >= 80) {
+            summary += "Outstanding week! You maintained high consistency.";
+        } else if (avgCompletion >= 60) {
+            summary += "Solid week. You're building momentum.";
+        } else if (avgCompletion >= 40) {
+            summary += "Progress made. Every day counts.";
+        } else {
+            summary += "Recovery week. You're still in the game.";
+        }
+
+        if (lastWeekData && weekData.avgCompletion > lastWeekData.avgCompletion) {
+            summary += " 📈 Improvement from last week!";
+        }
+
+        return summary;
+    }
+
+    function showWeeklyVictory() {
+        const summary = getWeeklyVictorySummary();
+        if (summary) {
+            const victoryDiv = document.createElement('div');
+            victoryDiv.style.cssText = 'position: fixed; bottom: 200px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #8b5cf6, #a78bfa); color: white; padding: 20px 30px; border-radius: 15px; z-index: 2000; font-weight: 700; box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4); max-width: 90%; text-align: center;';
+            victoryDiv.innerHTML = `<div style="font-size: 1.2rem; margin-bottom: 8px;">🎉 Weekly Victory</div><div style="font-size: 0.9rem; font-weight: 400;">${summary}</div>`;
+            document.body.appendChild(victoryDiv);
+            setTimeout(() => {
+                victoryDiv.style.transition = 'opacity 0.5s';
+                victoryDiv.style.opacity = '0';
+                setTimeout(() => victoryDiv.remove(), 500);
+            }, 5000);
+        }
+    }
+
+    function checkAndShowWeeklyVictory() {
+        const lastWeekShown = localStorage.getItem('lastWeekVictoryShown');
+        const currentWeek = getWeekNumber(currentDayIndex);
+        
+        if (lastWeekShown !== currentWeek.toString()) {
+            // Check if we have data for this week
+            const weekData = getWeekData(currentWeek);
+            if (weekData.completion.length > 0) {
+                showWeeklyVictory();
+                localStorage.setItem('lastWeekVictoryShown', currentWeek.toString());
+            }
+        }
+    }
+
+    // --- EXISTING CHECKBOX LOGIC ---
 
     // 2. Save checkbox states to localStorage
     function saveCheckboxStates() {
@@ -658,6 +1975,13 @@
 
     // 8. Initialize on page load
     function initializeApp() {
+        // Load System Tab Data
+        loadCounts();
+        
+        // Load North Star Module
+        loadVision();
+        loadRules();
+
         // Check if it's a new day - if so, reset checkboxes but keep history
         if (isNewDay()) {
             // Clear daily checkboxes but keep streak and completedDays
@@ -674,6 +1998,39 @@
         
         // Always update progress display
         updateProgress();
+        
+        // Update adaptive guidance
+        updateAdaptiveGuidance();
+        
+        // Update weekly progression
+        updateWeeklyProgression();
+        
+        // Update Food Navigator
+        updateFoodNavigator();
+        
+        // Show weekly victory if it's a new week
+        checkAndShowWeeklyVictory();
+        
+        // Load today's symptom if any
+        const symptomHistory = JSON.parse(localStorage.getItem(STORAGE_KEYS.SYMPTOM_HISTORY) || '[]');
+        const today = new Date().toDateString();
+        const todaySymptom = symptomHistory.find(s => s.date === today);
+        if (todaySymptom) {
+            document.querySelectorAll('.symptom-btn').forEach(btn => {
+                if (btn.dataset.symptom === todaySymptom.symptom) {
+                    btn.classList.add('active');
+                }
+            });
+            const symptomData = SYMPTOM_INTELLIGENCE[todaySymptom.symptom];
+            if (symptomData) {
+                const actionsDiv = document.getElementById('symptom-actions');
+                const immediateDiv = document.getElementById('symptom-immediate');
+                if (actionsDiv && immediateDiv) {
+                    immediateDiv.innerHTML = symptomData.immediate.map(a => `• ${a}`).join('<br>');
+                    actionsDiv.style.display = 'block';
+                }
+            }
+        }
     }
 
     // Display Streak
@@ -742,15 +2099,151 @@
         // Save progress and checkbox states immediately
         saveProgress();
         saveCheckboxStates();
+        
+        // Update adaptive guidance when progress changes
+        updateAdaptiveGuidance();
+        
+        // Check for micro-celebrations (when all tasks in a time block are complete)
+        checkBlockCompletions();
     }
 
-    // 4. Master Checkbox Logic (Auto-check block)
+    function checkBlockCompletions() {
+        const blocks = ['morning', 'afternoon', 'evening', 'night'];
+        blocks.forEach(blockName => {
+            const block = document.getElementById(`block-${blockName}`);
+            if (block) {
+                const inputs = block.querySelectorAll('input[type="checkbox"]');
+                const allChecked = Array.from(inputs).every(input => input.checked);
+                const blockKey = `block-celebrated-${blockName}`;
+                const alreadyCelebrated = sessionStorage.getItem(blockKey);
+                
+                if (allChecked && !alreadyCelebrated && inputs.length > 0) {
+                    triggerMicroCelebration(blockName);
+                    sessionStorage.setItem(blockKey, 'true');
+                } else if (!allChecked) {
+                    sessionStorage.removeItem(blockKey);
+                }
+            }
+        });
+    }
+
+    // --- WEEKLY PROGRESSION SYSTEM ---
+    function getWeekNumber(dayIndex) {
+        return Math.floor(dayIndex / 7) + 1;
+    }
+
+    function getWeekData(weekNum) {
+        const startDay = (weekNum - 1) * 7;
+        const endDay = Math.min(startDay + 6, TOTAL_DAYS - 1);
+        const weekData = {
+            completion: [],
+            symptoms: [],
+            strengthCount: 0,
+            avgCompletion: 0
+        };
+
+        for (let i = startDay; i <= endDay; i++) {
+            const dayPercent = completedDays[i];
+            if (dayPercent !== undefined && dayPercent !== null) {
+                weekData.completion.push(dayPercent);
+            }
+        }
+
+        // Get symptom history for this week
+        const symptomHistory = JSON.parse(localStorage.getItem(STORAGE_KEYS.SYMPTOM_HISTORY) || '[]');
+        const systemCounts = JSON.parse(localStorage.getItem(STORAGE_KEYS.SYSTEM_COUNTS) || '{}');
+        
+        weekData.avgCompletion = weekData.completion.length > 0 
+            ? Math.round(weekData.completion.reduce((a, b) => a + b, 0) / weekData.completion.length)
+            : 0;
+
+        return weekData;
+    }
+
+    function calculateWeeklyFocus(currentWeek) {
+        const lastWeek = currentWeek > 1 ? currentWeek - 1 : null;
+        const lastWeekData = lastWeek ? getWeekData(lastWeek) : null;
+        const currentWeekData = getWeekData(currentWeek);
+
+        // Default focuses for first week
+        let strength = 'Wall push-ups: 2 sets, Sit-to-stand: 2 sets daily';
+        let nutrition = 'Warm, cooked foods only. Focus on soups and stews.';
+        let recovery = '7-8 hours sleep non-negotiable. Gentle movement daily.';
+        let mobility = '10min morning walk. Box breathing 2x daily.';
+
+        if (lastWeekData) {
+            const avgCompletion = lastWeekData.avgCompletion;
+            const hasBloating = lastWeekData.symptoms.some(s => s === 'Bloated' || s === 'Constipated');
+            const hasBreathIssues = lastWeekData.symptoms.some(s => s === 'Breath Limited');
+            const hasReflux = lastWeekData.symptoms.some(s => s === 'Reflux');
+
+            // Strength progression logic
+            if (avgCompletion >= 70 && !hasBreathIssues && !hasReflux) {
+                strength = 'Progress to incline push-ups. Add 1 set of squats.';
+            } else if (avgCompletion >= 50 && !hasBreathIssues) {
+                strength = 'Maintain wall push-ups: 3 sets. Sit-to-stand: 3 sets.';
+            } else {
+                strength = 'Light movement only. Focus on form, not volume.';
+            }
+
+            // Nutrition focus
+            if (hasBloating || hasReflux) {
+                nutrition = 'Gut healing priority: Khichdi, soups, soft rice. No raw foods.';
+            } else if (avgCompletion >= 70) {
+                nutrition = 'Maintain warm foods. Can experiment with one new cooked vegetable.';
+            } else {
+                nutrition = 'Stick to proven safe foods. Extra hydration.';
+            }
+
+            // Recovery focus
+            if (hasBreathIssues || hasReflux) {
+                recovery = 'Rest days prioritized. Light walking only. Extra sleep.';
+            } else if (avgCompletion >= 80) {
+                recovery = 'Maintain sleep schedule. Active recovery on rest days.';
+            } else {
+                recovery = 'Focus on sleep quality. Reduce screen time before bed.';
+            }
+
+            // Mobility & Breath
+            if (hasBreathIssues) {
+                mobility = 'Breathing exercises 3x daily. Very light walking only.';
+            } else if (avgCompletion >= 70) {
+                mobility = 'Increase walk time gradually. Add gentle stretching.';
+            } else {
+                mobility = '10min walks. Box breathing morning and evening.';
+            }
+        }
+
+        return { strength, nutrition, recovery, mobility };
+    }
+
+    function updateWeeklyProgression() {
+        const weekNum = getWeekNumber(currentDayIndex);
+        document.getElementById('current-week').textContent = weekNum;
+
+        const focuses = calculateWeeklyFocus(weekNum);
+        document.getElementById('weekly-strength').textContent = focuses.strength;
+        document.getElementById('weekly-nutrition').textContent = focuses.nutrition;
+        document.getElementById('weekly-recovery').textContent = focuses.recovery;
+        document.getElementById('weekly-mobility').textContent = focuses.mobility;
+    }
+
+    // 4. Master Checkbox Logic (Auto-check block) with Micro-Celebrations
     function toggleBlock(blockName) {
         const block = document.getElementById(`block-${blockName}`);
         const inputs = block.querySelectorAll('input[type="checkbox"]');
         const allChecked = Array.from(inputs).every(input => input.checked);
         inputs.forEach(input => { input.checked = !allChecked; });
         updateProgress(); // This will save states automatically
+        
+        // Micro-celebration when all tasks in a block are completed
+        if (!allChecked) {
+            // Check if all are now checked
+            const nowAllChecked = Array.from(inputs).every(input => input.checked);
+            if (nowAllChecked) {
+                triggerMicroCelebration(blockName);
+            }
+        }
     }
 
     // 5. Complete Day Logic (The Big Button)
@@ -769,11 +2262,14 @@
         triggerCelebration(percent);
     }
 
-    // 6. Celebration & Journey Logic
+    // 6. Celebration & Journey Logic (Enhanced Psychology Engine)
     function triggerCelebration(percent) {
         const overlay = document.getElementById('celebration-overlay');
         const title = overlay.querySelector('h2');
         const msg = overlay.querySelector('p');
+
+        // Get identity messages based on streak
+        const identityMsg = getIdentityMessage(streak + (percent > 0 ? 1 : 0));
 
         // Custom message based on effort
         if (percent === 100) {
@@ -787,7 +2283,18 @@
             msg.innerText = "Every small step counts.";
         } else {
             title.innerText = "Rest Day?";
-            msg.innerText = "Tomorrow is a new start.";
+            msg.innerText = "Tomorrow is a new start. Recovery is part of the journey.";
+        }
+
+        // Add identity message if available
+        if (identityMsg) {
+            const identityDiv = document.createElement('p');
+            identityDiv.style.cssText = 'margin-top: 15px; font-weight: 700; color: #8b5cf6; font-size: 1.1rem;';
+            identityDiv.textContent = identityMsg;
+            const existingIdentity = overlay.querySelector('.identity-message');
+            if (existingIdentity) existingIdentity.remove();
+            identityDiv.className = 'identity-message';
+            msg.parentNode.insertBefore(identityDiv, msg.nextSibling);
         }
 
         overlay.classList.add('active');
@@ -796,10 +2303,22 @@
         if (completedDays[currentDayIndex] === undefined || completedDays[currentDayIndex] === null) {
             completedDays[currentDayIndex] = percent;
             
-            // Streak Logic: Reset on 0%, Increment on >0%
+            // Streak Logic: Never punish breaks — guide recovery
             if (percent > 0) {
                 streak++;
             } else {
+                // Streak safety: Reset but with encouraging message
+                if (streak > 0) {
+                    // Show recovery message instead of punishment
+                    const recoveryMsg = overlay.querySelector('.recovery-message');
+                    if (!recoveryMsg) {
+                        const recoveryDiv = document.createElement('p');
+                        recoveryDiv.className = 'recovery-message';
+                        recoveryDiv.style.cssText = 'margin-top: 10px; font-size: 0.9rem; color: #64748b; font-style: italic;';
+                        recoveryDiv.textContent = "Recovery is part of the journey. Your progress isn't lost.";
+                        msg.parentNode.insertBefore(recoveryDiv, msg.nextSibling);
+                    }
+                }
                 streak = 0;
             }
         }
@@ -825,6 +2344,11 @@
             saveCheckboxStates(); // Save reset state
             updateProgress();
             
+            // Reset System Counters (Optional, usually good to reset counters daily)
+            systemCounts = { diet: 0, push: 0, squat: 0 };
+            localStorage.setItem(STORAGE_KEYS.SYSTEM_COUNTS, JSON.stringify(systemCounts));
+            loadCounts(); // Update UI
+
             // Advance Day
             if(currentDayIndex < TOTAL_DAYS - 1) {
                 currentDayIndex++;
@@ -846,6 +2370,11 @@
             const checkboxes = document.querySelectorAll('.task-checkbox');
             checkboxes.forEach(box => { box.checked = false; });
             
+            // Reset System Counters
+            systemCounts = { diet: 0, push: 0, squat: 0 };
+            localStorage.setItem(STORAGE_KEYS.SYSTEM_COUNTS, JSON.stringify(systemCounts));
+            loadCounts();
+
             // Save the reset state
             saveCheckboxStates();
             saveProgress();
@@ -867,6 +2396,17 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
+
+    // Initialize breath slider
+    document.addEventListener('DOMContentLoaded', function() {
+        const breathSlider = document.getElementById('input-breath');
+        const breathValue = document.getElementById('breath-value');
+        if (breathSlider && breathValue) {
+            breathSlider.addEventListener('input', function(e) {
+                breathValue.textContent = e.target.value;
+            });
+        }
+    });
 
     // Run on load
     initializeApp();
